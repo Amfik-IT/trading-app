@@ -2,26 +2,29 @@ const FETCH_ALL_ITEMS = 'FETCH_ALL_ITEMS'
 const FETCH_ALL_ITEMS_SUCCESS = 'FETCH_ALL_ITEMS_SUCCESS'
 const FETCH_ALL_ITEMS_ERROR = 'FETCH_ALL_ITEMS_ERROR'
 
-const cardReducer = (state = {
+const operationsReducer = (state = {
   items: [],
   isLoading: false,
   errors: {}
 }, action) => {
   switch (action.type) {
   case FETCH_ALL_ITEMS:
-    return Object.assign({}, state, {
-      isLoading: true
-    })
+      return {
+          ...state,
+          isLoading: true
+      }
   case FETCH_ALL_ITEMS_SUCCESS:
-    return Object.assign({}, state, {
-      isLoading: false,
-      items: action.payload
-    })
+    return {
+        ...state,
+        isLoading: "completed",
+        items: action.payload
+    }
   case FETCH_ALL_ITEMS_ERROR:
-    return Object.assign({}, state, {
-      isLoading: false,
-      errors: action.errors
-    })
+    return {
+        ...state,
+        isLoading: false,
+        errors: action.errors
+    }
   default:
     return state
   }
@@ -34,4 +37,4 @@ export const updateOperationActionCreator = (data) =>
 export const errorActionCreator = (data) =>
     ({type: FETCH_ALL_ITEMS_ERROR, errors: data,})
 
-export default cardReducer;
+export default operationsReducer;

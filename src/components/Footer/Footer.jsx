@@ -1,6 +1,4 @@
 import React from 'react';
-// import s from './Header.module.css';
-// import ava from '../../assets/img/theme/team-4.jpg';
 
 const Footer = () => {
     return (
