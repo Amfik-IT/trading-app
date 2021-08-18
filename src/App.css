@@ -1,5 +1,4 @@
 @import url('./assets/css/nucleo.css');
-/* @import url('./assets/css/nucleo-svg.css'); */
 @import url('./assets/css//fontawesome-free/css/all.min.css');
 @import url('./assets/css/argon.css');
 
@@ -8,26 +7,4 @@
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-.a {
-  text-decoration: none;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100vw;
-  font-family: "Open Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  margin: 0;
-  text-align: left;
-  color: #525f7f;
-}
-
-.app-wrapper-content {
-  flex-grow: 2;
-  margin-left: 250px;
 }
