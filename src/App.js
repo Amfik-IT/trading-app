@@ -14,6 +14,7 @@ function App(props) {
   const [pageInfo, setPageInfo] = useState({
     title: 'Dashboard',
     path: '',
+    active: 'Dashboard',
   });
 
   const [menuStatus, setMenuStatus] = useState(false);
@@ -28,15 +29,15 @@ function App(props) {
     .then(response => response.json())
     .then(items => props.store.dispatch(updateOperationActionCreator(items)))
     .catch(errors => props.store.dispatch(errorActionCreator(errors)))
-  },[])
+  },[props.store])
 
   return (
     <BrowserRouter>
       <div className={`${menuStatus ? "nav-open" : ""} g-sidenav-show g-sidenav-hidden`}>
-        <Navbar setInfo={setPageInfo} />
-        <div class="main-content" id="panel">
+        <Navbar setInfo={setPageInfo} active={pageInfo.active}/>
+        <div className="main-content" id="panel">
           <Header menuToggler={menuToggler} pageInfo={pageInfo}/>
-          <div class="container-fluid mt--6">
+          <div className="container-fluid mt--6">
             <Route path="/dashboard" render={ () => <Dashboard /> } />
             <Route path="/tables" render={ () => <TablesContainer />} />
             <Footer />

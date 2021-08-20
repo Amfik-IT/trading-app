@@ -4,22 +4,22 @@ const Breadcrumbs = (props) => {
     const title =
         props.pageInfo.title !== 'Dashboard' ? props.pageInfo.title : 'Default';
     return (
-        <div class='col-lg-6 col-7'>
-            <h6 class='h2 text-white d-inline-block mb-0'>{title}</h6>
+        <div className='col-lg-6 col-7'>
+            <h6 className='h2 text-white d-inline-block mb-0'>{title}</h6>
             <nav
                 aria-label='breadcrumb'
-                class='d-none d-md-inline-block ml-md-4'
+                className='d-none d-md-inline-block ml-md-4'
             >
-                <ol class='breadcrumb breadcrumb-links breadcrumb-dark'>
-                    <li class='breadcrumb-item'>
+                <ol className='breadcrumb breadcrumb-links breadcrumb-dark'>
+                    <li className='breadcrumb-item'>
                         <a href='/'>
-                            <i class='fas fa-home'></i>
+                            <i className='fas fa-home'></i>
                         </a>
                     </li>
-                    <li class='breadcrumb-item'>
+                    <li className='breadcrumb-item'>
                         <a href={props.pageInfo.path}>{props.pageInfo.title}</a>
                     </li>
-                    <li class='breadcrumb-item active' aria-current='page'>
+                    <li className='breadcrumb-item active' aria-current='page'>
                         {title}
                     </li>
                 </ol>

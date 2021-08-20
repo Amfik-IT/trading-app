@@ -1,17 +1,17 @@
 import React from 'react';
 import NavButtons from './NavButtons/NavButtons';
 import ProfileButtons from './ProfileButtons/ProfileButtons';
-import SearchInput from './SearchInput/SearchInput';
+import SearchContainer from './SearchInput/SearchContainer';
 
 const Nav = (props) => {
     return (
-        <nav class='navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom'>
-            <div class='container-fluid'>
+        <nav className='navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom'>
+            <div className='container-fluid'>
                 <div
-                    class='collapse navbar-collapse'
+                    className='collapse navbar-collapse'
                     id='navbarSupportedContent'
                 >
-                    <SearchInput />
+                    <SearchContainer />
                     <NavButtons menuToggler={props.menuToggler} />
                     <ProfileButtons />
                 </div>

@@ -3,9 +3,9 @@ import logo from '../../../assets/img/brand/blue.png';
 
 const Logo = (props) => {
     return (
-        <div class='sidenav-header  align-items-center'>
-            <a class='navbar-brand' href='/dashboard'>
-                <img src={logo} class='navbar-brand-img' alt='...' />
+        <div className='sidenav-header  align-items-center'>
+            <a className='navbar-brand' href='/dashboard'>
+                <img src={logo} className='navbar-brand-img' alt='...' />
             </a>
         </div>
     );

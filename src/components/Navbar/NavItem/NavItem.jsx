@@ -4,18 +4,18 @@ import { NavLink } from 'react-router-dom';
 
 const NavItem = (props) => {
     function click() {
-        props.setInfo({title: props.text, path: props.path,});
+        props.setInfo({title: props.text, path: props.path, active: props.text});
     };
     return (
-        <li class='nav-item'>
+        <li className='nav-item'>
             <NavLink
                 to={props.path}
                 activeClassName={s.active}
-                className='nav-link'
+                className={`nav-link ${props.active ? "active" : ""}`}
                 onClick={click}
             >
-                <i class='ni ni-tv-2 text-primary'></i>
-                <span class='nav-link-text'>{props.text}</span>
+                <i className='ni ni-tv-2 text-primary'></i>
+                <span className='nav-link-text'>{props.text}</span>
             </NavLink>
         </li>
     );

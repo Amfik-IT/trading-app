@@ -3,31 +3,37 @@ import React from 'react';
 const TablesItem = (props) => {
     return (
         <tr>
-            <th scope='row'>
-                <div class='media align-items-center'>
-                    <div class='media-body'>
-                        <span class='name mb-0 text-sm'>{props.number}</span>
+            <td>
+                <div className='media align-items-center'>
+                    <div className='media-body'>
+                        <span className='name mb-0 text-sm'>{props._id}</span>
                     </div>
                 </div>
-            </th>
-            <td class='budget'>{props.symbol}</td>
+            </td>
+            <td className='budget'>{props.symbol}</td>
             <td>
-                <span class='badge badge-dot mr-4'>
-                    <i class='bg-info'></i>
-                    <span class='status'>{props.incomeType}</span>
+                <span className='badge badge-dot mr-4'>
+                    <i className='bg-info'></i>
+                    <span className='status'>{props.incomeType}</span>
                 </span>
             </td>
             <td>
-                <i class={`fas ${props.income > 0 ? "fa-arrow-up text-success" : "fa-arrow-down text-warning"} mr-3`}></i>{' '}
-                <span class='avatar-group'>{props.income}</span>
+                <i
+                    className={`fas ${
+                        props.income > 0
+                            ? 'fa-arrow-up text-success'
+                            : 'fa-arrow-down text-warning'
+                    } mr-3`}
+                ></i>{' '}
+                <span className='avatar-group'>{props.income}</span>
             </td>
             <td>
-                <div class='d-flex align-items-center'>
-                    <span class='completion mr-2'>{props.asset}</span>
+                <div className='d-flex align-items-center'>
+                    <span className='completion mr-2'>{props.asset}</span>
                 </div>
             </td>
-            <td class='text-right'>
-                <div class='dropdown'>{props.time}</div>
+            <td className='text-center'>
+                <div className='dropdown'>{props.time}</div>
             </td>
         </tr>
     );

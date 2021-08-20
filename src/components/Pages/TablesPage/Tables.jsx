@@ -1,116 +1,119 @@
 import React from 'react';
 import TablesItem from './TablesItem/TablesItem';
-// import s from './Tables.module.css';
 
 const Tables = (props) => {
-    // let onTextChange = (e) => {
-    //     let text = e.target.value;
-    //     props.updateText(text);
+    // let onNextPage = (e) => { // TODO: тут будет пагинация
+    //     let text = e.target;
     // };
     let operations;
-    if (props.operations.isLoading === "completed") {
-        operations = props.operations.items.data.map((item, index) => <TablesItem key={item.id} number={index + 1} {...item} />);
+    if (props.operations.isLoading === 'completed') {
+        operations = props.operations.items.map((item) => (
+            <TablesItem key={item._id} {...item} />
+        ));
     }
-    console.log(props.operations.items.data)
+    // console.log(props.operations.items); // TODO: для дебага
 
     return (
         <>
-            <div class='row'>
-                <div class='col'>
-                    <div class='card'>
-                        <div class='card-header border-0'>
-                            <h3 class='mb-0'>Operations</h3>
+            <div className='row'>
+                <div className='col'>
+                    <div className='card'>
+                        <div className='card-header border-0'>
+                            <h3 className='mb-0'>Operations</h3>
                         </div>
-                        <div class='table-responsive'>
-                            <table class='table align-items-center table-flush'>
-                                <thead class='thead-light'>
+                        <div className='table-responsive'>
+                            <table className='table align-items-center table-flush'>
+                                <thead className='thead-light'>
                                     <tr>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='name'
                                         >
-                                            Number
+                                            Id
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='budget'
                                         >
                                             Symbol
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='status'
                                         >
                                             Income Type
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='completion'
                                         >
                                             Income
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='completion'
                                         >
                                             Asset
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort text-center'
                                             data-sort='completion'
                                         >
                                             Date
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class='list'>
-                                    {props.operations.isLoading !== "completed" ? "Загрузка..." : operations}
+                                <tbody className='list'>
+                                    {props.operations.isLoading !== 'completed'
+                                        ? <tr><th>Загрузка...</th></tr>
+                                        : operations}
                                 </tbody>
                             </table>
                         </div>
-                        <div class='card-footer py-4'>
+                        <div className='card-footer py-4'>
                             <nav aria-label='...'>
-                                <ul class='pagination justify-content-end mb-0'>
-                                    <li class='page-item disabled'>
+                                <ul className='pagination justify-content-end mb-0'>
+                                    <li className='page-item disabled'>
                                         <a
-                                            class='page-link'
+                                            className='page-link'
                                             href='/'
-                                            tabindex='-1'
                                         >
-                                            <i class='fas fa-angle-left'></i>
-                                            <span class='sr-only'>
+                                            <i className='fas fa-angle-left'></i>
+                                            <span className='sr-only'>
                                                 Previous
                                             </span>
                                         </a>
                                     </li>
-                                    <li class='page-item active'>
-                                        <a class='page-link' href='/'>
+                                    <li className='page-item active'>
+                                        <a className='page-link' href='/'>
                                             1
                                         </a>
                                     </li>
-                                    <li class='page-item'>
-                                        <a class='page-link' href='/'>
+                                    <li className='page-item'>
+                                        <a className='page-link' href='/'>
                                             2{' '}
-                                            <span class='sr-only'>
+                                            <span className='sr-only'>
                                                 (current)
                                             </span>
                                         </a>
                                     </li>
-                                    <li class='page-item'>
-                                        <a class='page-link' href='/'>
+                                    <li className='page-item'>
+                                        <a className='page-link' href='/'>
                                             3
                                         </a>
                                     </li>
-                                    <li class='page-item'>
-                                        <a class='page-link' href='/'>
-                                            <i class='fas fa-angle-right'></i>
-                                            <span class='sr-only'>Next</span>
+                                    <li className='page-item'>
+                                        <a className='page-link' href='/'>
+                                            <i className='fas fa-angle-right'></i>
+                                            <span className='sr-only'>
+                                                Next
+                                            </span>
                                         </a>
                                     </li>
                                 </ul>

@@ -4,14 +4,14 @@ import NavItem from './NavItem/NavItem';
 
 const Navbar = (props) => {
     return (
-        <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
-            <div class="scrollbar-inner">
+        <nav className="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+            <div className="scrollbar-inner">
                 <Logo />
-                <div class="navbar-inner">
-                    <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-                        <ul class="navbar-nav">
-                            <NavItem setInfo={props.setInfo} path="/dashboard" text="Dashboard"/>
-                            <NavItem setInfo={props.setInfo} path="/tables" text="Tables"/>
+                <div className="navbar-inner">
+                    <div className="collapse navbar-collapse" id="sidenav-collapse-main">
+                        <ul className="navbar-nav">
+                            <NavItem setInfo={props.setInfo} active={props.active === "Dashboard" ? true : false} path="/dashboard" text="Dashboard"/>
+                            <NavItem setInfo={props.setInfo} active={props.active === "Tables" ? true : false} path="/tables" text="Tables"/>
                         </ul>
                     </div>
                 </div>
