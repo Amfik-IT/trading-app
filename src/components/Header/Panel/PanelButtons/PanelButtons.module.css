@@ -1,0 +1,8 @@
+.positionRelative {
+    position: relative;
+}
+
+.position {
+    right: 20px;
+    min-width: 9rem;
+}

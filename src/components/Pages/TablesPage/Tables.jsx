@@ -6,10 +6,32 @@ const Tables = (props) => {
     //     let text = e.target;
     // };
     let operations;
+
     if (props.operations.isLoading === 'completed') {
-        operations = props.operations.items.map((item) => (
-            <TablesItem key={item._id} {...item} />
-        ));
+        if (props.operations.filter) {
+            const sortPosition = camelize(props.operations.filter.toLowerCase());
+
+            function camelize(str) {
+                return str
+                    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+                        return index === 0
+                            ? word.toLowerCase()
+                            : word.toUpperCase();
+                    })
+                    .replace(/\s+/g, '');
+            }
+
+            operations = props.operations.items.sort((a, b) => {
+                    if (a[sortPosition] > b[sortPosition]) return 1;
+                    if (a[sortPosition] === b[sortPosition]) return 0;
+                    if (a[sortPosition] < b[sortPosition]) return -1;
+                })
+                .map((item) => <TablesItem key={item._id} {...item} />);
+        } else {
+            operations = props.operations.items.map((item) => (
+                <TablesItem key={item._id} {...item} />
+            ));
+        }
     }
     // console.log(props.operations.items); // TODO: для дебага
 
@@ -70,9 +92,14 @@ const Tables = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody className='list'>
-                                    {props.operations.isLoading !== 'completed'
-                                        ? <tr><th>Загрузка...</th></tr>
-                                        : operations}
+                                    {props.operations.isLoading !==
+                                    'completed' ? (
+                                        <tr>
+                                            <th>Загрузка...</th>
+                                        </tr>
+                                    ) : (
+                                        operations
+                                    )}
                                 </tbody>
                             </table>
                         </div>
@@ -80,10 +107,7 @@ const Tables = (props) => {
                             <nav aria-label='...'>
                                 <ul className='pagination justify-content-end mb-0'>
                                     <li className='page-item disabled'>
-                                        <a
-                                            className='page-link'
-                                            href='/'
-                                        >
+                                        <a className='page-link' href='/'>
                                             <i className='fas fa-angle-left'></i>
                                             <span className='sr-only'>
                                                 Previous
