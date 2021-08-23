@@ -1,10 +1,12 @@
 import SearchInput from './SearchInput';
-import {updateSearchActionCreator, loadingActionCreator, updateOperationActionCreator, errorActionCreator} from '../../../../redux/operations-reducer'
+import {updateSearchActionCreator, updatePageActionCreator} from '../../../../redux/operations-reducer'
 import { connect } from 'react-redux';
+import createRequest from '../../../../api/api';
 
 let mapStateToProps = (state) => {
     return {
         search: state.operations.search,
+        createRequest: createRequest,
     };
 };
 let mapDispatchToProps = (dispatch) => {
@@ -12,15 +14,9 @@ let mapDispatchToProps = (dispatch) => {
         updateSearch: (text) => {
             dispatch(updateSearchActionCreator(text));
         },
-        loading: (text) => {
-            dispatch(loadingActionCreator(text));
-        },
-        updateOperation: (text) => {
-            dispatch(updateOperationActionCreator(text));
-        },
-        error: (text) => {
-            dispatch(errorActionCreator(text));
-        },
+        updatePage: (count) => {
+            dispatch(updatePageActionCreator(count));
+        }
     };
 };
 const SearchContainer = connect(mapStateToProps, mapDispatchToProps)(SearchInput);

@@ -7,8 +7,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Dashboard from './components/Pages/DashboardPage/Dashboard';
 import { useEffect } from 'react';
-import {loadingActionCreator, updateOperationActionCreator,errorActionCreator} from "./redux/operations-reducer"
 import { useState } from 'react';
+import createRequest from './api/api';
 
 function App(props) {
   const [pageInfo, setPageInfo] = useState({
@@ -24,12 +24,8 @@ function App(props) {
   }
   
   useEffect(() => {
-    props.store.dispatch(loadingActionCreator())
-    fetch("https://invest-dimasik.herokuapp.com/api/trades?limit=10")
-    .then(response => response.json())
-    .then(items => props.store.dispatch(updateOperationActionCreator(items)))
-    .catch(errors => props.store.dispatch(errorActionCreator(errors)))
-  },[props.store])
+    createRequest();
+  },[])
 
   return (
     <BrowserRouter>

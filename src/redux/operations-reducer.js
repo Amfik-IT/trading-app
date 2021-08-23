@@ -3,6 +3,9 @@ const FETCH_ALL_ITEMS_SUCCESS = 'FETCH_ALL_ITEMS_SUCCESS'
 const FETCH_ALL_ITEMS_ERROR = 'FETCH_ALL_ITEMS_ERROR'
 const UPDATE_SEARCH = 'UPDATE_SEARCH';
 const UPDATE_FILTER = 'UPDATE_FILTER';
+const UPDATE_PAGE = 'UPDATE_PAGE';
+const UPDATE_PERIOD = 'UPDATE_PERIOD';
+
 
 const operationsReducer = (state = {
   items: [],
@@ -10,7 +13,10 @@ const operationsReducer = (state = {
   errors: {},
   search: "",
   fullCount: "",
-  sort: ""
+  sort: "",
+  page: 1,
+  pageSize: 10,
+  period: "",
 }, action) => {
   switch (action.type) {
   case FETCH_ALL_ITEMS:
@@ -41,6 +47,16 @@ const operationsReducer = (state = {
         ...state,
         filter: action.sort
     }
+  case UPDATE_PAGE:
+    return {
+        ...state,
+        page: action.page
+    }
+  case UPDATE_PERIOD:
+    return {
+        ...state,
+        period: action.period
+    }
   default:
     return state
   }
@@ -56,5 +72,8 @@ export const updateSearchActionCreator = (text) =>
     ({type: UPDATE_SEARCH, search: text,})
 export const updateFilterActionCreator = (text) =>
     ({type: UPDATE_FILTER, sort: text,})
-
+export const updatePageActionCreator = (count) =>
+    ({type: UPDATE_PAGE, page: count,})
+export const updatePeriodActionCreator = (url) =>
+    ({type: UPDATE_PERIOD, period: url,})
 export default operationsReducer;

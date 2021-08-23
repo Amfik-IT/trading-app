@@ -1,10 +1,25 @@
 import React from 'react';
+import PageButton from './PageButton/PageButton';
 import TablesItem from './TablesItem/TablesItem';
+import createRequest from '../../../api/api';
+import { useState } from 'react';
 
 const Tables = (props) => {
-    // let onNextPage = (e) => { // TODO: тут будет пагинация
-    //     let text = e.target;
-    // };
+    const [numbersArr, setNumbersArr] = useState({first: 1, last: 10})
+    
+    const onNextPage = (e) => {
+        let count = Number(e.target.innerHTML);
+        props.updatePage(count);
+        if(count === numbersArr.last) setNumbersArr({first: (numbersArr.first === 1 ? numbersArr.first + 9 : numbersArr.first + 10), last: numbersArr.last + 10})
+        createRequest();
+    };
+   
+    const pages = [];
+    for (let i = numbersArr.first; i <= numbersArr.last ; i++) {
+        pages.push(i);
+    }
+    const buttons = pages.map((p, i) => <PageButton key={i} onClick={onNextPage} count={p} active={props.operations.page === p ? "active" : ""}/>);
+    
     let operations;
 
     if (props.operations.isLoading === 'completed') {
@@ -25,6 +40,7 @@ const Tables = (props) => {
                     if (a[sortPosition] > b[sortPosition]) return 1;
                     if (a[sortPosition] === b[sortPosition]) return 0;
                     if (a[sortPosition] < b[sortPosition]) return -1;
+                    return null;
                 })
                 .map((item) => <TablesItem key={item._id} {...item} />);
         } else {
@@ -33,7 +49,17 @@ const Tables = (props) => {
             ));
         }
     }
-    // console.log(props.operations.items); // TODO: для дебага
+
+    const previousPage = () => {
+        if(props.operations.page - 1 < numbersArr.first) setNumbersArr({first: (numbersArr.first === 10 ? numbersArr.first - 9 : numbersArr.first - 10), last: numbersArr.last - 10})
+        props.updatePage(props.operations.page - 1);
+        createRequest();
+    }
+
+    const nextPage = () => {
+        props.updatePage(props.operations.page + 1);
+        createRequest();
+    }
 
     return (
         <>
@@ -106,39 +132,22 @@ const Tables = (props) => {
                         <div className='card-footer py-4'>
                             <nav aria-label='...'>
                                 <ul className='pagination justify-content-end mb-0'>
-                                    <li className='page-item disabled'>
-                                        <a className='page-link' href='/'>
+                                    <li className={`page-item ${props.operations.page === 1 ? "disabled" : ""}`}>
+                                        <button onClick={previousPage} className='page-link' href='/'>
                                             <i className='fas fa-angle-left'></i>
                                             <span className='sr-only'>
                                                 Previous
                                             </span>
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li className='page-item active'>
-                                        <a className='page-link' href='/'>
-                                            1
-                                        </a>
-                                    </li>
+                                    {buttons}
                                     <li className='page-item'>
-                                        <a className='page-link' href='/'>
-                                            2{' '}
-                                            <span className='sr-only'>
-                                                (current)
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li className='page-item'>
-                                        <a className='page-link' href='/'>
-                                            3
-                                        </a>
-                                    </li>
-                                    <li className='page-item'>
-                                        <a className='page-link' href='/'>
+                                        <button onClick={nextPage} className='page-link' href='/'>
                                             <i className='fas fa-angle-right'></i>
                                             <span className='sr-only'>
                                                 Next
                                             </span>
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </nav>

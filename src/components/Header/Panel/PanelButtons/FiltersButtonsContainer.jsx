@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import FiltersButtons from './FiltersButtons';
-import {updateFilterActionCreator} from '../../../../redux/operations-reducer';
+import {updateFilterActionCreator, updatePeriodActionCreator} from '../../../../redux/operations-reducer';
 
 let mapStateToProps = (state) => {
     return {
@@ -11,6 +11,9 @@ let mapDispatchToProps = (dispatch) => {
     return {
         updateFilter: (text) => {
             dispatch(updateFilterActionCreator(text));
+        },
+        updatePeriod: (url) => {
+            dispatch(updatePeriodActionCreator(url));
         }
     };
 };

@@ -1,15 +1,11 @@
-// import React from 'react';
-
 const SearchInput = (props) => {
     const setSearch = (e) => {
         let text = e.target.value.toUpperCase();
         props.updateSearch(text);
-        props.loading();
-        fetch(`https://invest-dimasik.herokuapp.com/api/trades?limit=10&symbol=${text}`)
-        .then(response => response.json())
-        .then(items => props.updateOperation(items))
-        .catch(errors => props.error(errors))
+        props.updatePage(1);
+        props.createRequest();
     }
+
     return (
         <form
             className='navbar-search navbar-search-light form-inline mr-sm-3'
