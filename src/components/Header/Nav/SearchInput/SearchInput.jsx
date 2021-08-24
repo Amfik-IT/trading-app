@@ -1,11 +1,4 @@
 const SearchInput = (props) => {
-    const setSearch = (e) => {
-        let text = e.target.value.toUpperCase();
-        props.updateSearch(text);
-        props.updatePage(1);
-        props.createRequest();
-    }
-
     return (
         <form
             className='navbar-search navbar-search-light form-inline mr-sm-3'
@@ -23,7 +16,7 @@ const SearchInput = (props) => {
                         placeholder='Search'
                         type='text'
                         value={props.search}
-                        onChange={setSearch}
+                        onChange={props.setSearch}
                     />
                 </div>
             </div>
