@@ -5,6 +5,7 @@ const UPDATE_SEARCH = 'UPDATE_SEARCH';
 const UPDATE_FILTER = 'UPDATE_FILTER';
 const UPDATE_PAGE = 'UPDATE_PAGE';
 const UPDATE_PERIOD = 'UPDATE_PERIOD';
+const CLEAR_FILTERS = 'CLEAR_FILTERS';
 
 
 const operationsReducer = (state = {
@@ -22,7 +23,7 @@ const operationsReducer = (state = {
   case FETCH_ALL_ITEMS:
       return {
           ...state,
-          isLoading: true
+          isLoading: "loading"
       }
   case FETCH_ALL_ITEMS_SUCCESS:
     return {
@@ -34,7 +35,7 @@ const operationsReducer = (state = {
   case FETCH_ALL_ITEMS_ERROR:
     return {
         ...state,
-        isLoading: false,
+        isLoading: "error",
         errors: action.errors
     }
   case UPDATE_SEARCH:
@@ -45,7 +46,7 @@ const operationsReducer = (state = {
   case UPDATE_FILTER:
     return {
         ...state,
-        filter: action.sort
+        sort: action.sort
     }
   case UPDATE_PAGE:
     return {
@@ -56,6 +57,13 @@ const operationsReducer = (state = {
     return {
         ...state,
         period: action.period
+    }
+  case CLEAR_FILTERS:
+    return {
+        ...state,
+        period: "",
+        page: 1,
+        sort: ""
     }
   default:
     return state
@@ -76,4 +84,6 @@ export const updatePageActionCreator = (count) =>
     ({type: UPDATE_PAGE, page: count,})
 export const updatePeriodActionCreator = (url) =>
     ({type: UPDATE_PERIOD, period: url,})
+export const clearFiltersActionCreator = () =>
+    ({type: CLEAR_FILTERS})
 export default operationsReducer;

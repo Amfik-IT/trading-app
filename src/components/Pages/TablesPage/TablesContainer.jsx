@@ -25,8 +25,8 @@ const TablesContainer = (props) => {
     let operations;
 
     if (props.operations.isLoading === 'completed') {
-        if (props.operations.filter) {
-            const sortPosition = camelize(props.operations.filter.toLowerCase());
+        if (props.operations.sort) {
+            const sortPosition = camelize(props.operations.sort.toLowerCase());
 
             function camelize(str) {
                 return str

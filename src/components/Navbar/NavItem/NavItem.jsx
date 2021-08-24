@@ -14,7 +14,7 @@ const NavItem = (props) => {
                 className={`nav-link ${props.active ? "active" : ""}`}
                 onClick={click}
             >
-                <i className='ni ni-tv-2 text-primary'></i>
+                <i className={`ni ${props.icon} text-primary`}></i>
                 <span className='nav-link-text'>{props.text}</span>
             </NavLink>
         </li>

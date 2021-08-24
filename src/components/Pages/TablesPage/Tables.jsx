@@ -1,6 +1,19 @@
 import React from 'react';
+import LoaderOrError from './LoaderOrError/LoaderOrError';
+import loader from '../../../assets/img/loaderOrError/loader.gif';
+import error from '../../../assets/img/loaderOrError/error.jpg';
 
 const Tables = (props) => {
+    let inTbody;
+
+    if (props.isLoading === 'loading') {
+        inTbody = <LoaderOrError loader={loader} />;
+    } else if (props.isLoading === 'completed') {
+        inTbody = props.operations;
+    } else {
+        inTbody = <LoaderOrError loader={error} />;
+    }
+
     return (
         <>
             <div className='row'>
@@ -57,23 +70,22 @@ const Tables = (props) => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody className='list'>
-                                    {props.isLoading !==
-                                    'completed' ? (
-                                        <tr>
-                                            <th>Загрузка...</th>
-                                        </tr>
-                                    ) : (
-                                        props.operations
-                                    )}
-                                </tbody>
+                                <tbody className='list'>{inTbody}</tbody>
                             </table>
                         </div>
                         <div className='card-footer py-4'>
                             <nav aria-label='...'>
                                 <ul className='pagination justify-content-end mb-0'>
-                                    <li className={`page-item ${props.page === 1 ? "disabled" : ""}`}>
-                                        <button onClick={props.previousPage} className='page-link' href='/'>
+                                    <li
+                                        className={`page-item ${
+                                            props.page === 1 ? 'disabled' : ''
+                                        }`}
+                                    >
+                                        <button
+                                            onClick={props.previousPage}
+                                            className='page-link'
+                                            href='/'
+                                        >
                                             <i className='fas fa-angle-left'></i>
                                             <span className='sr-only'>
                                                 Previous
@@ -82,7 +94,11 @@ const Tables = (props) => {
                                     </li>
                                     {props.buttons}
                                     <li className='page-item'>
-                                        <button onClick={props.nextPage} className='page-link' href='/'>
+                                        <button
+                                            onClick={props.nextPage}
+                                            className='page-link'
+                                            href='/'
+                                        >
                                             <i className='fas fa-angle-right'></i>
                                             <span className='sr-only'>
                                                 Next

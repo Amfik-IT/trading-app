@@ -10,8 +10,8 @@ const Navbar = (props) => {
                 <div className="navbar-inner">
                     <div className="collapse navbar-collapse" id="sidenav-collapse-main">
                         <ul className="navbar-nav">
-                            <NavItem setInfo={props.setInfo} active={props.active === "Dashboard" ? true : false} path="/dashboard" text="Dashboard"/>
-                            <NavItem setInfo={props.setInfo} active={props.active === "Tables" ? true : false} path="/tables" text="Tables"/>
+                            <NavItem setInfo={props.setInfo} active={props.active === "Dashboard" ? true : false} icon="ni-tv-2" path="/dashboard" text="Dashboard"/>
+                            <NavItem setInfo={props.setInfo} active={props.active === "Tables" ? true : false} icon="ni-bullet-list-67" path="/tables" text="Tables"/>
                         </ul>
                     </div>
                 </div>
