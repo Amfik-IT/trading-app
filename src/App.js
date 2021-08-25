@@ -9,6 +9,7 @@ import Dashboard from './components/Pages/DashboardPage/Dashboard';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import createRequest from './api/api';
+import {NotificationContainer} from 'react-notifications';
 
 function App(props) {
   const [pageInfo, setPageInfo] = useState({
@@ -37,6 +38,7 @@ function App(props) {
             <Route path={"/dashboard"} render={ () => <Dashboard /> } />
             <Route path="/tables" render={ () => <TablesContainer />} />
             <Footer />
+            <NotificationContainer/>
           </div>
         </div>
       </div>
