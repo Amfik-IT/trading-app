@@ -3,7 +3,7 @@ import {updateSearchActionCreator, updatePageActionCreator} from '../../../redux
 import { connect } from 'react-redux';
 import createRequest from '../../../api/api';
 
-const SearchContainer = (props) => {
+const SearchInputContainer = (props) => {
     const setSearch = (e) => {
         let text = e.target.value.toUpperCase();
         props.updateSearch(text);
@@ -35,4 +35,4 @@ let mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInputContainer);

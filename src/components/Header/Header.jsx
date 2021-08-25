@@ -1,11 +1,19 @@
 import React from 'react';
-import SearchContainer from '../common/SearchInput/SearchContainer';
+import SearchInputContainer from '../common/SearchInput/SearchInputContainer';
 import NavButtons from '../common/NavButtons/NavButtons';
 import ProfileButtons from '../common/ProfileButtons/ProfileButtons';
 import Breadcrumbs from '../common/Breadcrumbs/Breadcrumbs';
 import FiltersButtons from '../common/FiltersButtons/FiltersButtons';
+import Button from '../common/Button/Button';
+import i18n from '../../i18n';
 
 const Header = (props) => {
+    const onEn = () => {
+        i18n.changeLanguage("en");
+    }
+    const onRu = () => {
+        i18n.changeLanguage("ru");
+    }
     return (
         <>
             <nav className='navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom'>
@@ -14,7 +22,9 @@ const Header = (props) => {
                         className='collapse navbar-collapse'
                         id='navbarSupportedContent'
                     >
-                        <SearchContainer />
+                        <SearchInputContainer />
+                        <Button onClick={onRu} name={"Ru"}/>
+                        <Button onClick={onEn} name={"En"}/>
                         <NavButtons menuToggler={props.menuToggler} />
                         <ProfileButtons />
                     </div>

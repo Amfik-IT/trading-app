@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 import createRequest from '../../../api/api';
 import {clearFiltersActionCreator, updateFilterActionCreator, updatePeriodActionCreator, updatePageActionCreator} from '../../../redux/operations-reducer';
 import Button from '../Button/Button';
+import { useTranslation } from "react-i18next";
 
 const PanelButtons = (props) => {
+    const { t } = useTranslation();
     const [menuStatus, setMenuStatus] = useState('');
 
     const menuToggler = () => {
@@ -33,7 +35,7 @@ const PanelButtons = (props) => {
         const now = date.toLocaleDateString().split('.').reverse().join('-');
         const month = String(date.getMonth() + 1).length === 1 ? "0" + (date.getMonth() + 1) : String(date.getMonth() + 1);
         const weekDay = date.getDay();
-        const nameButton = e.target.innerHTML;
+        const nameButton = e.target.id;
 
         if (props.sort === "" || props.sort !== nameButton) {
             props.updateFilter(nameButton);
@@ -67,13 +69,13 @@ const PanelButtons = (props) => {
     }
 
     const buttons = buttonNames.map((item, idex) => (
-        <FiltersButton key={idex} name={item} onFilter={onFilter}/>
+        <FiltersButton key={idex} id={item} name={t(item)} onFilter={onFilter}/>
     ));
 
     return (
         <div className={`col-lg-6 col-5 text-right ${s.positionRelative}`}>
-            <Button onClick={onClearFilter} name={"Clear filter"}/>
-            <Button onClick={menuToggler} name={"Filters"}/>
+            <Button onClick={onClearFilter} name={t("Clear filter")}/>
+            <Button onClick={menuToggler} name={t("Filters")}/>
             <div
                 className={`dropdown-menu dropdown-menu-right ${s.position} ${menuStatus}`}
             >

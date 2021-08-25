@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
         <footer className='footer pt-0'>
             <div className='row align-items-center justify-content-lg-between'>
@@ -25,17 +27,12 @@ const Footer = () => {
                         </li>
                         <li className='nav-item'>
                             <a href='/' className='nav-link' target='_blank'>
-                                About Us
+                                {t("About Us")}
                             </a>
                         </li>
                         <li className='nav-item'>
                             <a href='/' className='nav-link' target='_blank'>
-                                Blog
-                            </a>
-                        </li>
-                        <li className='nav-item'>
-                            <a href='/' className='nav-link' target='_blank'>
-                                MIT License
+                                {t("Blog")}
                             </a>
                         </li>
                     </ul>

@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 const SearchInput = (props) => {
+    const { t } = useTranslation();
     return (
         <form
             className='navbar-search navbar-search-light form-inline mr-sm-3'
@@ -13,7 +16,7 @@ const SearchInput = (props) => {
                     </div>
                     <input
                         className='form-control'
-                        placeholder='Search'
+                        placeholder={t("Search")}
                         type='text'
                         value={props.search}
                         onChange={props.setSearch}

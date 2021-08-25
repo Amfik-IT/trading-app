@@ -2,8 +2,10 @@ import React from 'react';
 import LoaderOrError from '../../common/LoaderOrError/LoaderOrError';
 import loader from '../../../assets/img/loaderOrError/loader.gif';
 import error from '../../../assets/img/loaderOrError/error.jpg';
+import { useTranslation } from "react-i18next";
 
 const Tables = (props) => {
+    const { t } = useTranslation();
     let inTbody;
 
     if (props.isLoading === 'loading') {
@@ -20,7 +22,7 @@ const Tables = (props) => {
                 <div className='col'>
                     <div className='card'>
                         <div className='card-header border-0'>
-                            <h3 className='mb-0'>Operations</h3>
+                            <h3 className='mb-0'>{t("Operations")}</h3>
                         </div>
                         <div className='table-responsive'>
                             <table className='table align-items-center table-flush'>
@@ -38,35 +40,35 @@ const Tables = (props) => {
                                             className='sort'
                                             data-sort='budget'
                                         >
-                                            Symbol
+                                            {t("Symbol")}
                                         </th>
                                         <th
                                             scope='col'
                                             className='sort'
                                             data-sort='status'
                                         >
-                                            Income Type
+                                            {t("INCOME TYPE")}
                                         </th>
                                         <th
                                             scope='col'
                                             className='sort'
                                             data-sort='completion'
                                         >
-                                            Income
+                                            {t("INCOME")}
                                         </th>
                                         <th
                                             scope='col'
                                             className='sort'
                                             data-sort='completion'
                                         >
-                                            Asset
+                                            {t("ASSET")}
                                         </th>
                                         <th
                                             scope='col'
                                             className='sort text-center'
                                             data-sort='completion'
                                         >
-                                            Date
+                                            {t("Date")}
                                         </th>
                                     </tr>
                                 </thead>
