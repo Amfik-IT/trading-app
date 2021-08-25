@@ -1,23 +1,47 @@
+import React from 'react';
+import { useState } from 'react';
+import FiltersButton from '../FiltersButton/FiltersButton';
+import s from './FiltersButtons.module.css';
 import { connect } from 'react-redux';
-import s from "./FiltersButtons.module.css"
-import createRequest from '../../../../api/api';
-import {updateFilterActionCreator, updatePeriodActionCreator, updatePageActionCreator} from '../../../../redux/operations-reducer';
+import createRequest from '../../../api/api';
+import {clearFiltersActionCreator, updateFilterActionCreator, updatePeriodActionCreator, updatePageActionCreator} from '../../../redux/operations-reducer';
+import Button from '../Button/Button';
 
-const FiltersButtonsContainer = (props) => {
+const PanelButtons = (props) => {
+    const [menuStatus, setMenuStatus] = useState('');
 
-    const filterToggler = (e) => {
+    const menuToggler = () => {
+        setMenuStatus(menuStatus ? '' : 'show');
+    };
+
+    const onClearFilter = () => {
+        props.clearFilter();
+        createRequest();
+    }
+
+    const buttonNames = [
+        'INCOME TYPE',
+        'INCOME',
+        'ASSET',
+        'MONTH',
+        'WEEK',
+        'DAY',
+    ];
+
+    const onFilter = (e) => {
         const date = new Date();
         const now = date.toLocaleDateString().split('.').reverse().join('-');
         const month = String(date.getMonth() + 1).length === 1 ? "0" + (date.getMonth() + 1) : String(date.getMonth() + 1);
         const weekDay = date.getDay();
+        const nameButton = e.target.innerHTML;
 
-        if (props.sort === "" || props.sort !== props.name) {
-            props.updateFilter(props.name);
+        if (props.sort === "" || props.sort !== nameButton) {
+            props.updateFilter(nameButton);
         } else {
             props.updateFilter("");
         }
 
-        switch (props.name) {
+        switch (nameButton) {
             case 'MONTH':
                 props.updatePeriod(`dateFrom=2021-${month}-01&dateTo=${now}`);
                 props.updatePage(1);
@@ -42,7 +66,21 @@ const FiltersButtonsContainer = (props) => {
         }
     }
 
-    return <button onClick={filterToggler} className={`dropdown-item ${s.buttonOutline}`}>{props.name}</button>;
+    const buttons = buttonNames.map((item, idex) => (
+        <FiltersButton key={idex} name={item} onFilter={onFilter}/>
+    ));
+
+    return (
+        <div className={`col-lg-6 col-5 text-right ${s.positionRelative}`}>
+            <Button onClick={onClearFilter} name={"Clear filter"}/>
+            <Button onClick={menuToggler} name={"Filters"}/>
+            <div
+                className={`dropdown-menu dropdown-menu-right ${s.position} ${menuStatus}`}
+            >
+                {buttons}
+            </div>
+        </div>
+    );
 };
 
 const mapStateToProps = (state) => {
@@ -53,6 +91,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        clearFilter: () => {
+            dispatch(clearFiltersActionCreator());
+        },
         updateFilter: (text) => {
             dispatch(updateFilterActionCreator(text));
         },
@@ -65,4 +106,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FiltersButtonsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PanelButtons);

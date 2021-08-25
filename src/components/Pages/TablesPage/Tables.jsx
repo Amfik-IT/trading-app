@@ -1,5 +1,5 @@
 import React from 'react';
-import LoaderOrError from './LoaderOrError/LoaderOrError';
+import LoaderOrError from '../../common/LoaderOrError/LoaderOrError';
 import loader from '../../../assets/img/loaderOrError/loader.gif';
 import error from '../../../assets/img/loaderOrError/error.jpg';
 

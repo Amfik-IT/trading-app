@@ -1,12 +1,16 @@
 import React from 'react';
-import Logo from './Logo/Logo';
-import NavItem from './NavItem/NavItem';
+import logo from '../../assets/img/brand/blue.png';
+import NavItem from '../common/NavItem/NavItem';
 
 const Navbar = (props) => {
     return (
         <nav className="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
             <div className="scrollbar-inner">
-                <Logo />
+                <div className='sidenav-header  align-items-center'>
+                    <a className='navbar-brand' href='/dashboard'>
+                        <img src={logo} className='navbar-brand-img' alt='...' />
+                    </a>
+                </div>
                 <div className="navbar-inner">
                     <div className="collapse navbar-collapse" id="sidenav-collapse-main">
                         <ul className="navbar-nav">

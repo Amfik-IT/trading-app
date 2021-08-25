@@ -1,7 +1,7 @@
 import SearchInput from './SearchInput';
-import {updateSearchActionCreator, updatePageActionCreator} from '../../../../redux/operations-reducer'
+import {updateSearchActionCreator, updatePageActionCreator} from '../../../redux/operations-reducer'
 import { connect } from 'react-redux';
-import createRequest from '../../../../api/api';
+import createRequest from '../../../api/api';
 
 const SearchContainer = (props) => {
     const setSearch = (e) => {

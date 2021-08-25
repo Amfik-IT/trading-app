@@ -1,5 +1,5 @@
 import React from 'react';
-import ava4 from '../../../../assets/img/theme/team-4.jpg';
+import ava4 from '../../../assets/img/theme/team-4.jpg';
 
 const ProfileButtons = (props) => {
     return (

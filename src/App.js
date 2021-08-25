@@ -34,7 +34,7 @@ function App(props) {
         <div className="main-content" id="panel">
           <Header menuToggler={menuToggler} pageInfo={pageInfo}/>
           <div className="container-fluid mt--6">
-            <Route path="/dashboard" render={ () => <Dashboard /> } />
+            <Route path={"/dashboard"} render={ () => <Dashboard /> } />
             <Route path="/tables" render={ () => <TablesContainer />} />
             <Footer />
           </div>

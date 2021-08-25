@@ -1,8 +1,8 @@
 import Tables from './Tables';
 import { connect } from 'react-redux';
 import {updatePageActionCreator} from '../../../redux/operations-reducer';
-import PageButton from './PageButton/PageButton';
-import TablesItem from './TablesItem/TablesItem';
+import PageButton from '../../common/PageButton/PageButton';
+import TablesItem from '../../common/TablesItem/TablesItem';
 import createRequest from '../../../api/api';
 import { useState } from 'react';
 
