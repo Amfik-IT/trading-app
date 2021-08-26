@@ -1,43 +1,38 @@
 import React from 'react';
-// import s from './Header.module.css';
-// import ava from '../../assets/img/theme/team-4.jpg';
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+    const { t } = useTranslation();
     return (
-        <footer class='footer pt-0'>
-            <div class='row align-items-center justify-content-lg-between'>
-                <div class='col-lg-6'>
-                    <div class='copyright text-center  text-lg-left  text-muted'>
+        <footer className='footer pt-0'>
+            <div className='row align-items-center justify-content-lg-between'>
+                <div className='col-lg-6'>
+                    <div className='copyright text-center  text-lg-left  text-muted'>
                         &copy; 2020{' '}
                         <a
                             href='/'
-                            class='font-weight-bold ml-1'
+                            className='font-weight-bold ml-1'
                             target='_blank'
                         >
                             Creative Tim
                         </a>
                     </div>
                 </div>
-                <div class='col-lg-6'>
-                    <ul class='nav nav-footer justify-content-center justify-content-lg-end'>
-                        <li class='nav-item'>
-                            <a href='/' class='nav-link' target='_blank'>
+                <div className='col-lg-6'>
+                    <ul className='nav nav-footer justify-content-center justify-content-lg-end'>
+                        <li className='nav-item'>
+                            <a href='/' className='nav-link' target='_blank'>
                                 Creative Tim
                             </a>
                         </li>
-                        <li class='nav-item'>
-                            <a href='/' class='nav-link' target='_blank'>
-                                About Us
+                        <li className='nav-item'>
+                            <a href='/' className='nav-link' target='_blank'>
+                                {t("About Us")}
                             </a>
                         </li>
-                        <li class='nav-item'>
-                            <a href='/' class='nav-link' target='_blank'>
-                                Blog
-                            </a>
-                        </li>
-                        <li class='nav-item'>
-                            <a href='/' class='nav-link' target='_blank'>
-                                MIT License
+                        <li className='nav-item'>
+                            <a href='/' className='nav-link' target='_blank'>
+                                {t("Blog")}
                             </a>
                         </li>
                     </ul>

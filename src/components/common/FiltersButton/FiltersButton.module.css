@@ -1,0 +1,9 @@
+.buttonOutline:focus {
+    outline: none;
+}
+
+.active {
+    text-decoration: none;
+    color: #5e72e4 !important;
+    background-color: #f6f9fc;
+}

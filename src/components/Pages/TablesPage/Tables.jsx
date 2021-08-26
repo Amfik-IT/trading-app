@@ -1,752 +1,111 @@
 import React from 'react';
-// import s from './Tables.module.css';
-import ava4 from '../../../assets/img/theme/team-4.jpg';
-import ava1 from '../../../assets/img/theme/team-1.jpg';
-import ava2 from '../../../assets/img/theme/team-2.jpg';
-import ava3 from '../../../assets/img/theme/team-3.jpg';
-import bootstrap from '../../../assets/img/theme/bootstrap.jpg';
-import angular from '../../../assets/img/theme/angular.jpg';
-import react from '../../../assets/img/theme/react.jpg';
-import sketch from '../../../assets/img/theme/sketch.jpg';
-import vue from '../../../assets/img/theme/vue.jpg';
+import LoaderOrError from '../../common/LoaderOrError/LoaderOrError';
+import loader from '../../../assets/img/loaderOrError/loader.gif';
+import error from '../../../assets/img/loaderOrError/error.jpg';
+import { useTranslation } from "react-i18next";
 
 const Tables = (props) => {
-    // let onTextChange = (e) => {
-    //     let text = e.target.value;
-    //     props.updateText(text);
-    // };
+    const { t } = useTranslation();
+    let inTbody;
+
+    if (props.isLoading === 'loading') {
+        inTbody = <LoaderOrError loader={loader} />;
+    } else if (props.isLoading === 'completed') {
+        inTbody = props.operations;
+    } else {
+        inTbody = <LoaderOrError loader={error} />;
+    }
 
     return (
         <>
-            <div class='row'>
-                <div class='col'>
-                    <div class='card'>
-                        <div class='card-header border-0'>
-                            <h3 class='mb-0'>Light table</h3>
+            <div className='row'>
+                <div className='col'>
+                    <div className='card'>
+                        <div className='card-header border-0'>
+                            <h3 className='mb-0'>{t("Operations")}</h3>
                         </div>
-                        <div class='table-responsive'>
-                            <table class='table align-items-center table-flush'>
-                                <thead class='thead-light'>
+                        <div className='table-responsive'>
+                            <table className='table align-items-center table-flush'>
+                                <thead className='thead-light'>
                                     <tr>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='name'
                                         >
-                                            Project
+                                            Id
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='budget'
                                         >
-                                            Budget
+                                            {t("Symbol")}
                                         </th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='status'
                                         >
-                                            Status
+                                            {t("INCOME TYPE")}
                                         </th>
-                                        <th scope='col'>Users</th>
                                         <th
                                             scope='col'
-                                            class='sort'
+                                            className='sort'
                                             data-sort='completion'
                                         >
-                                            Completion
+                                            {t("INCOME")}
                                         </th>
-                                        <th scope='col'></th>
+                                        <th
+                                            scope='col'
+                                            className='sort'
+                                            data-sort='completion'
+                                        >
+                                            {t("ASSET")}
+                                        </th>
+                                        <th
+                                            scope='col'
+                                            className='sort text-center'
+                                            data-sort='completion'
+                                        >
+                                            {t("Date")}
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody class='list'>
-                                    <tr>
-                                        <th scope='row'>
-                                            <div class='media align-items-center'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar rounded-circle mr-3'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={bootstrap}
-                                                    />
-                                                </a>
-                                                <div class='media-body'>
-                                                    <span class='name mb-0 text-sm'>
-                                                        Argon Design System
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class='budget'>$2500 USD</td>
-                                        <td>
-                                            <span class='badge badge-dot mr-4'>
-                                                <i class='bg-warning'></i>
-                                                <span class='status'>
-                                                    pending
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class='avatar-group'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Ryan Tompson'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava1}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Romina Hadid'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava2}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Alexander Smith'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava3}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Jessica Doe'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava4}
-                                                    />
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='d-flex align-items-center'>
-                                                <span class='completion mr-2'>
-                                                    60%
-                                                </span>
-                                                <div>
-                                                    <div class='progress'>
-                                                        <div
-                                                            class='progress-bar bg-warning'
-                                                            role='progressbar'
-                                                            aria-valuenow='60'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
-                                                        ></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class='text-right'>
-                                            <div class='dropdown'>
-                                                <a
-                                                    class='btn btn-sm btn-icon-only text-light'
-                                                    href='/'
-                                                    role='button'
-                                                    data-toggle='dropdown'
-                                                    aria-haspopup='true'
-                                                    aria-expanded='false'
-                                                >
-                                                    <i class='fas fa-ellipsis-v'></i>
-                                                </a>
-                                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Another action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Something else here
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope='row'>
-                                            <div class='media align-items-center'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar rounded-circle mr-3'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={angular}
-                                                    />
-                                                </a>
-                                                <div class='media-body'>
-                                                    <span class='name mb-0 text-sm'>
-                                                        Angular Now UI Kit PRO
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class='budget'>$1800 USD</td>
-                                        <td>
-                                            <span class='badge badge-dot mr-4'>
-                                                <i class='bg-success'></i>
-                                                <span class='status'>
-                                                    completed
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class='avatar-group'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Ryan Tompson'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava1}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Romina Hadid'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava2}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Alexander Smith'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava3}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Jessica Doe'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava4}
-                                                    />
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='d-flex align-items-center'>
-                                                <span class='completion mr-2'>
-                                                    100%
-                                                </span>
-                                                <div>
-                                                    <div class='progress'>
-                                                        <div
-                                                            class='progress-bar bg-success'
-                                                            role='progressbar'
-                                                            aria-valuenow='100'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
-                                                        ></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class='text-right'>
-                                            <div class='dropdown'>
-                                                <a
-                                                    class='btn btn-sm btn-icon-only text-light'
-                                                    href='/'
-                                                    role='button'
-                                                    data-toggle='dropdown'
-                                                    aria-haspopup='true'
-                                                    aria-expanded='false'
-                                                >
-                                                    <i class='fas fa-ellipsis-v'></i>
-                                                </a>
-                                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Another action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Something else here
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope='row'>
-                                            <div class='media align-items-center'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar rounded-circle mr-3'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={sketch}
-                                                    />
-                                                </a>
-                                                <div class='media-body'>
-                                                    <span class='name mb-0 text-sm'>
-                                                        Black Dashboard
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class='budget'>$3150 USD</td>
-                                        <td>
-                                            <span class='badge badge-dot mr-4'>
-                                                <i class='bg-danger'></i>
-                                                <span class='status'>
-                                                    delayed
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class='avatar-group'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Ryan Tompson'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava1}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Romina Hadid'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava2}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Alexander Smith'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava3}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Jessica Doe'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava4}
-                                                    />
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='d-flex align-items-center'>
-                                                <span class='completion mr-2'>
-                                                    72%
-                                                </span>
-                                                <div>
-                                                    <div class='progress'>
-                                                        <div
-                                                            class='progress-bar bg-danger'
-                                                            role='progressbar'
-                                                            aria-valuenow='72'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
-                                                        ></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class='text-right'>
-                                            <div class='dropdown'>
-                                                <a
-                                                    class='btn btn-sm btn-icon-only text-light'
-                                                    href='/'
-                                                    role='button'
-                                                    data-toggle='dropdown'
-                                                    aria-haspopup='true'
-                                                    aria-expanded='false'
-                                                >
-                                                    <i class='fas fa-ellipsis-v'></i>
-                                                </a>
-                                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Another action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Something else here
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope='row'>
-                                            <div class='media align-items-center'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar rounded-circle mr-3'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={react}
-                                                    />
-                                                </a>
-                                                <div class='media-body'>
-                                                    <span class='name mb-0 text-sm'>
-                                                        React Material Dashboard
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class='budget'>$4400 USD</td>
-                                        <td>
-                                            <span class='badge badge-dot mr-4'>
-                                                <i class='bg-info'></i>
-                                                <span class='status'>
-                                                    on schedule
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class='avatar-group'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Ryan Tompson'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava1}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Romina Hadid'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava2}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Alexander Smith'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava3}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Jessica Doe'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava4}
-                                                    />
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='d-flex align-items-center'>
-                                                <span class='completion mr-2'>
-                                                    90%
-                                                </span>
-                                                <div>
-                                                    <div class='progress'>
-                                                        <div
-                                                            class='progress-bar bg-info'
-                                                            role='progressbar'
-                                                            aria-valuenow='90'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
-                                                        ></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class='text-right'>
-                                            <div class='dropdown'>
-                                                <a
-                                                    class='btn btn-sm btn-icon-only text-light'
-                                                    href='/'
-                                                    role='button'
-                                                    data-toggle='dropdown'
-                                                    aria-haspopup='true'
-                                                    aria-expanded='false'
-                                                >
-                                                    <i class='fas fa-ellipsis-v'></i>
-                                                </a>
-                                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Another action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Something else here
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope='row'>
-                                            <div class='media align-items-center'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar rounded-circle mr-3'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={vue}
-                                                    />
-                                                </a>
-                                                <div class='media-body'>
-                                                    <span class='name mb-0 text-sm'>
-                                                        Vue Paper UI Kit PRO
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class='budget'>$2200 USD</td>
-                                        <td>
-                                            <span class='badge badge-dot mr-4'>
-                                                <i class='bg-success'></i>
-                                                <span class='status'>
-                                                    completed
-                                                </span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class='avatar-group'>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Ryan Tompson'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava1}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Romina Hadid'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava2}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Alexander Smith'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava3}
-                                                    />
-                                                </a>
-                                                <a
-                                                    href='/'
-                                                    class='avatar avatar-sm rounded-circle'
-                                                    data-toggle='tooltip'
-                                                    data-original-title='Jessica Doe'
-                                                >
-                                                    <img
-                                                        alt='img'
-                                                        src={ava4}
-                                                    />
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class='d-flex align-items-center'>
-                                                <span class='completion mr-2'>
-                                                    100%
-                                                </span>
-                                                <div>
-                                                    <div class='progress'>
-                                                        <div
-                                                            class='progress-bar bg-success'
-                                                            role='progressbar'
-                                                            aria-valuenow='100'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
-                                                        ></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class='text-right'>
-                                            <div class='dropdown'>
-                                                <a
-                                                    class='btn btn-sm btn-icon-only text-light'
-                                                    href='/'
-                                                    role='button'
-                                                    data-toggle='dropdown'
-                                                    aria-haspopup='true'
-                                                    aria-expanded='false'
-                                                >
-                                                    <i class='fas fa-ellipsis-v'></i>
-                                                </a>
-                                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Another action
-                                                    </a>
-                                                    <a
-                                                        class='dropdown-item'
-                                                        href='/'
-                                                    >
-                                                        Something else here
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody className='list'>{inTbody}</tbody>
                             </table>
                         </div>
-                        <div class='card-footer py-4'>
+                        <div className='card-footer py-4'>
                             <nav aria-label='...'>
-                                <ul class='pagination justify-content-end mb-0'>
-                                    <li class='page-item disabled'>
-                                        <a
-                                            class='page-link'
+                                <ul className='pagination justify-content-end mb-0'>
+                                    <li
+                                        className={`page-item ${
+                                            props.page === 1 ? 'disabled' : ''
+                                        }`}
+                                    >
+                                        <button
+                                            onClick={props.previousPage}
+                                            className='page-link'
                                             href='/'
-                                            tabindex='-1'
                                         >
-                                            <i class='fas fa-angle-left'></i>
-                                            <span class='sr-only'>
+                                            <i className='fas fa-angle-left'></i>
+                                            <span className='sr-only'>
                                                 Previous
                                             </span>
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li class='page-item active'>
-                                        <a class='page-link' href='/'>
-                                            1
-                                        </a>
-                                    </li>
-                                    <li class='page-item'>
-                                        <a class='page-link' href='/'>
-                                            2{' '}
-                                            <span class='sr-only'>
-                                                (current)
+                                    {props.buttons}
+                                    <li className='page-item'>
+                                        <button
+                                            onClick={props.nextPage}
+                                            className='page-link'
+                                            href='/'
+                                        >
+                                            <i className='fas fa-angle-right'></i>
+                                            <span className='sr-only'>
+                                                Next
                                             </span>
-                                        </a>
-                                    </li>
-                                    <li class='page-item'>
-                                        <a class='page-link' href='/'>
-                                            3
-                                        </a>
-                                    </li>
-                                    <li class='page-item'>
-                                        <a class='page-link' href='/'>
-                                            <i class='fas fa-angle-right'></i>
-                                            <span class='sr-only'>Next</span>
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </nav>

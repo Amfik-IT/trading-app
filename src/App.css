@@ -1,6 +1,7 @@
 @import url('./assets/css/nucleo.css');
 @import url('./assets/css//fontawesome-free/css/all.min.css');
 @import url('./assets/css/argon.css');
+@import url('react-notifications/lib/notifications.css');
 
 
 *,

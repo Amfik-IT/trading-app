@@ -1,0 +1,8 @@
+.active {
+    margin-right: .5rem;
+    margin-left: .5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: .375rem;
+    background: #f6f9fc;
+}
