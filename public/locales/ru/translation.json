@@ -15,5 +15,21 @@
     "Date": "Дата",
     "Symbol": "Символ",
     "About Us": "О нас",
-    "Blog": "Блог"
+    "Blog": "Блог",
+    "Income": "Доход",
+    "Overview": "Обзор",
+    "Month": "Месяц",
+    "Week": "Неделя",
+    "January": "Январь",
+    "February": "Февраль", 
+    "March": "Март", 
+    "April": "Апрель", 
+    "May": "Май", 
+    "June": "Июнь", 
+    "July": "Июль", 
+    "August": "Август", 
+    "September": "Сентябрь", 
+    "October": "Октябрь", 
+    "November": "Ноябрь", 
+    "December": "Декабрь"
 }

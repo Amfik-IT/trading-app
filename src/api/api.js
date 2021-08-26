@@ -2,7 +2,7 @@ import store from '../redux/redux-store';
 import {loadingActionCreator, updateOperationActionCreator, errorActionCreator} from "../redux/operations-reducer";
 import {NotificationManager} from 'react-notifications';
 
-const createRequest = (f) => {
+const createRequest = () => {
     const state = store.getState();
     const limit = state.operations.pageSize;
     const skip = (state.operations.page - 1) * 10;

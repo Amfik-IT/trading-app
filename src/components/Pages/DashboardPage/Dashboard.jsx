@@ -1,7 +1,55 @@
 import React from 'react';
-// import s from './Tables.module.css';
+import { connect } from 'react-redux';
+import {clearFiltersActionCreator} from '../../../redux/operations-reducer';
+import {NotificationManager} from 'react-notifications';
+import Chart from './Chart';
+import  './Dashboard.module.css'
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useTranslation } from "react-i18next";
+
+
 
 const Dashboard = (props) => {
+    const { t } = useTranslation();
+    const [data, setData] = useState({labels: [], data: []})
+
+    useEffect(() => {
+        fetch(`https://invest-dimasik.herokuapp.com/api/trades?limit=all`)
+        .then(response => response.json())
+        .then(items => setData(parsData(items.data)))
+        .catch(errors => {
+            NotificationManager.error(errors.message, errors.name, 5000, () => {
+                alert(errors.stack);
+            });
+    })
+    },[])
+
+    function parsData(data) {
+        let newData = {labels: [], data: []};
+        let month = null;
+        let count = null;
+        for (let i = 0; i < data.length; i++) {
+            let date = new Date(data[i].time)
+            if (i === 0) {
+                month = date.getMonth();
+                count = data[i].income;
+            } else {
+                if (date.getMonth() === month) {
+                    count += data[i].income;
+                } else {
+                    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    newData.labels.push(months[month]);
+                    newData.data.push(Math.ceil(count));
+                    month = date.getMonth();
+                    count = data[i].income;
+                }
+            }
+        }
+        newData.labels.reverse();
+        newData.data.reverse();
+        return newData;
+    }
 
     return (
         <>
@@ -12,10 +60,10 @@ const Dashboard = (props) => {
                             <div className='row align-items-center'>
                                 <div className='col'>
                                     <h6 className='text-light text-uppercase ls-1 mb-1'>
-                                        Overview
+                                        {t("Overview")}
                                     </h6>
                                     <h5 className='h3 text-white mb-0'>
-                                        Sales value
+                                        {t("Income")}
                                     </h5>
                                 </div>
                                 <div className='col'>
@@ -34,7 +82,7 @@ const Dashboard = (props) => {
                                                 data-toggle='tab'
                                             >
                                                 <span className='d-none d-md-block'>
-                                                    Month
+                                                    {t("Month")}
                                                 </span>
                                                 <span className='d-md-none'>M</span>
                                             </a>
@@ -53,7 +101,7 @@ const Dashboard = (props) => {
                                                 data-toggle='tab'
                                             >
                                                 <span className='d-none d-md-block'>
-                                                    Week
+                                                    {t("Week")}
                                                 </span>
                                                 <span className='d-md-none'>W</span>
                                             </a>
@@ -63,6 +111,7 @@ const Dashboard = (props) => {
                             </div>
                         </div>
                         <div className='card-body'>
+                            <Chart labels={data.labels} data={data.data}/>
                         </div>
                     </div>
                 </div>
@@ -92,7 +141,7 @@ const Dashboard = (props) => {
                                     <h3 className='mb-0'>Page visits</h3>
                                 </div>
                                 <div className='col text-right'>
-                                    <a href='#!' className='btn btn-sm btn-primary'>
+                                    <a href='/' className='btn btn-sm btn-primary'>
                                         See all
                                     </a>
                                 </div>
@@ -167,7 +216,7 @@ const Dashboard = (props) => {
                                     <h3 className='mb-0'>Social traffic</h3>
                                 </div>
                                 <div className='col text-right'>
-                                    <a href='#!' className='btn btn-sm btn-primary'>
+                                    <a href='/' className='btn btn-sm btn-primary'>
                                         See all
                                     </a>
                                 </div>
@@ -293,4 +342,18 @@ const Dashboard = (props) => {
     );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+    return {
+        operations: state.operations,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearFilters: (count) => {
+            dispatch(clearFiltersActionCreator(count));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
