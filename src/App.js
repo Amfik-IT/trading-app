@@ -15,7 +15,7 @@ function App(props) {
   const [pageInfo, setPageInfo] = useState({
     title: 'Dashboard',
     path: '',
-    active: 'Dashboard',
+    active: 'dashboard',
   });
 
   const [menuStatus, setMenuStatus] = useState(false);
@@ -27,7 +27,7 @@ function App(props) {
   useEffect(() => {
     createRequest();
   },[])
-
+  
   return (
     <BrowserRouter>
       <div className={`${menuStatus ? "nav-open" : ""} g-sidenav-show g-sidenav-hidden`}>
