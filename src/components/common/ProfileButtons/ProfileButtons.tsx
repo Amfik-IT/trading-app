@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import ava4 from '../../../assets/img/theme/team-4.jpg';
 
-const ProfileButtons = (props) => {
+const ProfileButtons: FC = () => {
     return (
         <ul className='navbar-nav align-items-center  ml-auto ml-md-0 '>
             <li className='nav-item dropdown'>

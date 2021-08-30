@@ -1,4 +1,4 @@
-import { type } from "os";
+import { ItemType, PayloadType } from "../types/types";
 
 const FETCH_ALL_ITEMS: string = 'FETCH_ALL_ITEMS'
 const FETCH_ALL_ITEMS_SUCCESS: string = 'FETCH_ALL_ITEMS_SUCCESS'
@@ -9,53 +9,45 @@ const UPDATE_PAGE: string = 'UPDATE_PAGE';
 const UPDATE_PERIOD: string = 'UPDATE_PERIOD';
 const CLEAR_FILTERS: string = 'CLEAR_FILTERS';
 
-export type ActionsType = {
-  type: string,
-  payload?: any,
-  errors?: any,
-  search?: string,
-  sort?: string,
-  page?: number,
-  period?: string
+
+// export type ActionsType = { // ! пока не понял как давать type для action
+//   type: string,
+//   payload?: PayloadType,
+//   errors?: any, // ! надо дать тип 
+//   search?: string,
+//   sort?: string,
+//   page?: number,
+//   period?: string
+// }
+
+
+const initialState = {
+  items: null as ItemType[] | null,
+  isLoading: null as string | null,
+  errors: {}, // ! надо дать тип 
+  search: "" as string,
+  fullCount: null as number | null,
+  sort: "" as string,
+  page: 1 as number,
+  pageSize: 10 as number,
+  period: "" as string,
 }
 
-export type InitialStateType = {
-  items: any,
-  isLoading: string,
-  errors: any,
-  search: string | undefined,
-  fullCount: string,
-  sort: string | undefined,
-  page: number | undefined,
-  pageSize: number,
-  period: string | undefined,
-}
+export type InitialStateType = typeof initialState;
 
-const initialState: InitialStateType = {
-  items: [],
-  isLoading: "",
-  errors: {},
-  search: "",
-  fullCount: "",
-  sort: "",
-  page: 1,
-  pageSize: 10,
-  period: "",
-}
-
-const operationsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+const operationsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
   switch (action.type) {
   case FETCH_ALL_ITEMS:
       return {
           ...state,
-          isLoading: "loading"
+          isLoading: "loading",
       }
   case FETCH_ALL_ITEMS_SUCCESS:
     return {
         ...state,
         isLoading: "completed",
         fullCount: action.payload.fullCount,
-        items: action.payload.data
+        items: action.payload.data,
     }
   case FETCH_ALL_ITEMS_ERROR:
     return {
@@ -99,29 +91,29 @@ type LoadingACType = {type: typeof FETCH_ALL_ITEMS}
 export const loadingActionCreator = (): LoadingACType =>
     ({type: FETCH_ALL_ITEMS})
 
-type UpdateOperationAC = {type: typeof FETCH_ALL_ITEMS_SUCCESS, payload: any}
-export const updateOperationActionCreator = (data: any): UpdateOperationAC =>
-    ({type: FETCH_ALL_ITEMS_SUCCESS, payload: data,})
+type UpdateOperationAC = {type: typeof FETCH_ALL_ITEMS_SUCCESS, payload: PayloadType}
+export const updateOperationActionCreator = (payload: PayloadType): UpdateOperationAC =>
+    ({type: FETCH_ALL_ITEMS_SUCCESS, payload,})
 
 type errorAC = {type: typeof FETCH_ALL_ITEMS_ERROR, errors: any}
-export const errorActionCreator = (data: any): errorAC =>
-    ({type: FETCH_ALL_ITEMS_ERROR, errors: data,})
+export const errorActionCreator = (errors: any): errorAC => // ! надо дать тип 
+    ({type: FETCH_ALL_ITEMS_ERROR, errors,})
 
 type UpdateSearchAC = {type: typeof UPDATE_SEARCH, search: string}
-export const updateSearchActionCreator = (text: string): UpdateSearchAC =>
-    ({type: UPDATE_SEARCH, search: text,})
+export const updateSearchActionCreator = (search: string): UpdateSearchAC =>
+    ({type: UPDATE_SEARCH, search,})
 
 type UpdateFilterAC = {type: typeof UPDATE_FILTER, sort: string}
-export const updateFilterActionCreator = (text: string) =>
-    ({type: UPDATE_FILTER, sort: text,})
+export const updateFilterActionCreator = (sort: string): UpdateFilterAC =>
+    ({type: UPDATE_FILTER, sort,})
 
 type UpdatePageAC = {type: typeof UPDATE_PAGE, page: number}
-export const updatePageActionCreator = (count: number): UpdatePageAC =>
-    ({type: UPDATE_PAGE, page: count,})
+export const updatePageActionCreator = (page: number): UpdatePageAC =>
+    ({type: UPDATE_PAGE, page,})
 
 type UpdatePeriodAC = {type: typeof UPDATE_PERIOD, period: string}
-export const updatePeriodActionCreator = (url: string): UpdatePeriodAC =>
-    ({type: UPDATE_PERIOD, period: url,})
+export const updatePeriodActionCreator = (period: string): UpdatePeriodAC =>
+    ({type: UPDATE_PERIOD, period,})
 
 type ClearFiltersAC = {type: typeof CLEAR_FILTERS}
 export const clearFiltersActionCreator = (): ClearFiltersAC =>

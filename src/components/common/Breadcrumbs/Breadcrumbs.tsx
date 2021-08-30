@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { useTranslation } from "react-i18next";
 
-const Breadcrumbs = (props) => {
+type PropsType = {
+    pageInfo: {title: string, path: string, active: string}
+}
+
+const Breadcrumbs: FC<PropsType> = ({pageInfo}) => {
     const { t } = useTranslation();
     const title =
-        props.pageInfo.title !== "Dashboard" ? props.pageInfo.title : t("Default");
+        pageInfo.title !== "Dashboard" ? pageInfo.title : t("Default");
     return (
         <div className='col-lg-6 col-7'>
             <h6 className='h2 text-white d-inline-block mb-0'>{title}</h6>
@@ -19,7 +23,7 @@ const Breadcrumbs = (props) => {
                         </a>
                     </li>
                     <li className='breadcrumb-item'>
-                        <a href={props.pageInfo.path}>{t(props.pageInfo.title)}</a>
+                        <a href={pageInfo.path}>{t(pageInfo.title)}</a>
                     </li>
                     <li className='breadcrumb-item active' aria-current='page'>
                         {t(title)}

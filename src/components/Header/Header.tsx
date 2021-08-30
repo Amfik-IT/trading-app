@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import SearchInputContainer from '../common/SearchInput/SearchInputContainer';
 import NavButtons from '../common/NavButtons/NavButtons';
 import ProfileButtons from '../common/ProfileButtons/ProfileButtons';
@@ -7,11 +7,18 @@ import FiltersButtons from '../common/FiltersButtons/FiltersButtons';
 import Button from '../common/Button/Button';
 import i18n from '../../i18n';
 
-const Header = (props) => {
-    const onEn = () => {
+type PropsType = {
+    menuToggler: () => void
+    pageInfo: {title: string, path: string, active: string}
+}
+
+type onFunctionType = () => void
+
+const Header: FC<PropsType> = ({menuToggler, pageInfo}) => {
+    const onEn: onFunctionType = () => {
         i18n.changeLanguage("en");
     }
-    const onRu = () => {
+    const onRu: onFunctionType = () => {
         i18n.changeLanguage("ru");
     }
     return (
@@ -25,7 +32,7 @@ const Header = (props) => {
                         <SearchInputContainer />
                         <Button onClick={onRu} name={"Ru"}/>
                         <Button onClick={onEn} name={"En"}/>
-                        <NavButtons menuToggler={props.menuToggler} />
+                        <NavButtons menuToggler={menuToggler} />
                         <ProfileButtons />
                     </div>
                 </div>
@@ -34,7 +41,7 @@ const Header = (props) => {
                 <div className='container-fluid'>
                     <div className='header-body'>
                         <div className='row align-items-center py-4'>
-                            <Breadcrumbs pageInfo={props.pageInfo} />
+                            <Breadcrumbs pageInfo={pageInfo} />
                             <FiltersButtons />
                         </div>
                     </div>

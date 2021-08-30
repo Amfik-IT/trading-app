@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { useState } from 'react';
 import FiltersButton from '../FiltersButton/FiltersButton';
 import s from './FiltersButtons.module.css';
@@ -8,20 +8,30 @@ import {clearFiltersActionCreator, updateFilterActionCreator, updatePeriodAction
 import Button from '../Button/Button';
 import { useTranslation } from "react-i18next";
 
-const PanelButtons = (props) => {
-    const { t } = useTranslation();
-    const [menuStatus, setMenuStatus] = useState('');
+type PropsType = {
+    sort: string;
+    clearFilter: () => void
+    updateFilter: (text: string) => void
+    updatePeriod: (url: string) => void
+    updatePage: (count: number) => void
+}
 
-    const menuToggler = () => {
+type onFunctionType = () => void
+
+const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePeriod, updatePage}) => {
+    const { t } = useTranslation();
+    const [menuStatus, setMenuStatus] = useState<string>('');
+
+    const menuToggler: onFunctionType = () => {
         setMenuStatus(menuStatus ? '' : 'show');
     };
 
-    const onClearFilter = () => {
-        props.clearFilter();
+    const onClearFilter: onFunctionType = () => {
+        clearFilter();
         createRequest();
     }
 
-    const buttonNames = [
+    const buttonNames: string[] = [
         'INCOME TYPE',
         'INCOME',
         'ASSET',
@@ -30,37 +40,37 @@ const PanelButtons = (props) => {
         'DAY',
     ];
 
-    const onFilter = (e) => {
-        const date = new Date();
-        const now = date.toLocaleDateString().split('.').reverse().join('-');
-        const month = String(date.getMonth() + 1).length === 1 ? "0" + (date.getMonth() + 1) : String(date.getMonth() + 1);
-        const weekDay = date.getDay();
-        const nameButton = e.target.id;
+    const onFilter = (e: any) => {
+        const date: any = new Date();
+        const now: string = date.toLocaleDateString().split('.').reverse().join('-');
+        const month: string = String(date.getMonth() + 1).length === 1 ? "0" + (date.getMonth() + 1) : String(date.getMonth() + 1);
+        const weekDay: number = date.getDay();
+        const nameButton: string = e.target.id;
 
-        if (props.sort === "" || props.sort !== nameButton) {
-            props.updateFilter(nameButton);
+        if (sort === "" || sort !== nameButton) {
+            updateFilter(nameButton);
         } else {
-            props.updateFilter("");
+            updateFilter("");
         }
 
         switch (nameButton) {
             case 'MONTH':
-                props.updatePeriod(`dateFrom=2021-${month}-01&dateTo=${now}`);
-                props.updatePage(1);
+                updatePeriod(`dateFrom=2021-${month}-01&dateTo=${now}`);
+                updatePage(1);
                 createRequest();
                 break;
             case 'WEEK':
                 date.setDate(date.getDate() - (weekDay - 1));
-                let dateFrom = date.toLocaleDateString().split('.').reverse().join('-');
+                let dateFrom: string = date.toLocaleDateString().split('.').reverse().join('-');
                 date.setDate(date.getDate() + 6);
-                let dateTo = date.toLocaleDateString().split('.').reverse().join('-');
-                props.updatePeriod(`dateFrom=${dateFrom}&dateTo=${dateTo}`);
-                props.updatePage(1);
+                let dateTo: string = date.toLocaleDateString().split('.').reverse().join('-');
+                updatePeriod(`dateFrom=${dateFrom}&dateTo=${dateTo}`);
+                updatePage(1);
                 createRequest();
                 break;
             case 'DAY':
-                props.updatePeriod(`dateFrom=${now}&dateTo=${now}`);
-                props.updatePage(1);
+                updatePeriod(`dateFrom=${now}&dateTo=${now}`);
+                updatePage(1);
                 createRequest();
                 break;
             default:
@@ -68,7 +78,7 @@ const PanelButtons = (props) => {
         }
     }
 
-    const buttons = buttonNames.map((item, idex) => (
+    const buttons = buttonNames.map((item: string, idex: number) => (
         <FiltersButton key={idex} id={item} name={t(item)} onFilter={onFilter}/>
     ));
 
@@ -85,24 +95,24 @@ const PanelButtons = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return {
         sort: state.operations.sort,
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
         clearFilter: () => {
             dispatch(clearFiltersActionCreator());
         },
-        updateFilter: (text) => {
+        updateFilter: (text: string) => {
             dispatch(updateFilterActionCreator(text));
         },
-        updatePeriod: (url) => {
+        updatePeriod: (url: string) => {
             dispatch(updatePeriodActionCreator(url));
         },
-        updatePage: (count) => {
+        updatePage: (count: number) => {
             dispatch(updatePageActionCreator(count));
         }
     };

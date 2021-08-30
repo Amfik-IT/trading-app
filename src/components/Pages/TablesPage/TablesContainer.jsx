@@ -9,6 +9,7 @@ import { useState } from 'react';
 const TablesContainer = (props) => {
     const [numbersArr, setNumbersArr] = useState({first: 1, last: 10})
     
+    // console.log(props.operations.items)
     const onNextPage = (e) => {
         let count = Number(e.target.innerHTML);
         props.updatePage(count);

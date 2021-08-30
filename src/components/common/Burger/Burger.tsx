@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-const Burger = (props) => {
+
+type PropsType = {
+    menuToggler: () => void
+}
+
+const Burger: FC<PropsType> = ({menuToggler}) => {
     return (
         <div
             className='pr-3 sidenav-toggler sidenav-toggler-dark'
             data-action='sidenav-pin'
             data-target='#sidenav-main'
-            onClick={props.menuToggler}
+            onClick={menuToggler}
         >
             <div className='sidenav-toggler-inner'>
                 <i className='sidenav-toggler-line'></i>

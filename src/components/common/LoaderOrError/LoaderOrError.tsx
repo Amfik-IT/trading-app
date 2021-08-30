@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './LoaderOrError.module.css';
 
-const LoaderOrError = (props) => {
+const LoaderOrError: FC<{loader: string}> = ({loader}) => {
     return (
         <tr>
-            <th colSpan='6' className={s.loadTH}>
+            <th colSpan={6} className={s.loadTH}>
                 <img
                     className={s.load}
-                    src={props.loader}
+                    src={loader}
                     alt='loading'
                     title='loading'
                 ></img>

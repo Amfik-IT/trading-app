@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { useTranslation } from "react-i18next";
 
-const Footer = () => {
+const Footer: FC = () => {
     const { t } = useTranslation();
     return (
         <footer className='footer pt-0'>
