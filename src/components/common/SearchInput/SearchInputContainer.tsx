@@ -1,5 +1,5 @@
 import SearchInput from './SearchInput';
-import {updateSearchActionCreator, updatePageActionCreator} from '../../../redux/operations-reducer'
+import {updateSearch, updatePage} from '../../../redux/operations-reducer'
 import { connect } from 'react-redux';
 import createRequest from '../../../api/api';
 import {FC} from "react";
@@ -38,15 +38,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     };
 };
 
-let mapDispatchToProps = (dispatch: any): MapDispatchToPropsType => {
-    return {
-        updateSearch: (text: string) => {
-            dispatch(updateSearchActionCreator(text));
-        },
-        updatePage: (count: number) => {
-            dispatch(updatePageActionCreator(count));
-        }
-    };
-};
-
-export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(SearchInputContainer);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+    updateSearch,
+    updatePage
+})(SearchInputContainer);

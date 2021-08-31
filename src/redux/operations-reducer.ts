@@ -88,35 +88,35 @@ const operationsReducer = (state: InitialStateType = initialState, action: any):
 }
 
 type LoadingACType = {type: typeof FETCH_ALL_ITEMS}
-export const loadingActionCreator = (): LoadingACType =>
+export const loading = (): LoadingACType =>
     ({type: FETCH_ALL_ITEMS})
 
 type UpdateOperationAC = {type: typeof FETCH_ALL_ITEMS_SUCCESS, payload: PayloadType}
-export const updateOperationActionCreator = (payload: PayloadType): UpdateOperationAC =>
+export const updateOperation = (payload: PayloadType): UpdateOperationAC =>
     ({type: FETCH_ALL_ITEMS_SUCCESS, payload,})
 
 type errorAC = {type: typeof FETCH_ALL_ITEMS_ERROR, errors: any}
-export const errorActionCreator = (errors: any): errorAC => // ! надо дать тип 
+export const error = (errors: any): errorAC => // ! надо дать тип
     ({type: FETCH_ALL_ITEMS_ERROR, errors,})
 
 type UpdateSearchAC = {type: typeof UPDATE_SEARCH, search: string}
-export const updateSearchActionCreator = (search: string): UpdateSearchAC =>
+export const updateSearch = (search: string): UpdateSearchAC =>
     ({type: UPDATE_SEARCH, search,})
 
 type UpdateFilterAC = {type: typeof UPDATE_FILTER, sort: string}
-export const updateFilterActionCreator = (sort: string): UpdateFilterAC =>
+export const updateFilter = (sort: string): UpdateFilterAC =>
     ({type: UPDATE_FILTER, sort,})
 
 type UpdatePageAC = {type: typeof UPDATE_PAGE, page: number}
-export const updatePageActionCreator = (page: number): UpdatePageAC =>
+export const updatePage = (page: number): UpdatePageAC =>
     ({type: UPDATE_PAGE, page,})
 
 type UpdatePeriodAC = {type: typeof UPDATE_PERIOD, period: string}
-export const updatePeriodActionCreator = (period: string): UpdatePeriodAC =>
+export const updatePeriod = (period: string): UpdatePeriodAC =>
     ({type: UPDATE_PERIOD, period,})
 
 type ClearFiltersAC = {type: typeof CLEAR_FILTERS}
-export const clearFiltersActionCreator = (): ClearFiltersAC =>
+export const clearFilters = (): ClearFiltersAC =>
     ({type: CLEAR_FILTERS})
     
 export default operationsReducer;

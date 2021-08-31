@@ -1,6 +1,6 @@
 import Tables from './Tables';
 import {connect} from 'react-redux';
-import {InitialStateType, updatePageActionCreator} from '../../../redux/operations-reducer';
+import {InitialStateType, updatePage} from '../../../redux/operations-reducer';
 import PageButton from '../../common/PageButton/PageButton';
 import TablesItem from '../../common/TablesItem/TablesItem';
 import createRequest from '../../../api/api';
@@ -96,12 +96,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     };
 };
 
-const mapDispatchToProps = (dispatch: any): mapDispatchToPropsType => {
-    return {
-        updatePage: (count: number) => {
-            dispatch(updatePageActionCreator(count));
-        }
-    };
-};
-
-export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(TablesContainer);
+export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {updatePage})(TablesContainer);

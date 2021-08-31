@@ -5,32 +5,32 @@ import s from './FiltersButtons.module.css';
 import { connect } from 'react-redux';
 import createRequest from '../../../api/api';
 import {
-    clearFiltersActionCreator,
-    updateFilterActionCreator,
-    updatePeriodActionCreator,
-    updatePageActionCreator,
+    clearFilters,
+    updateFilter,
+    updatePeriod,
+    updatePage,
 } from '../../../redux/operations-reducer';
 import Button from '../Button/Button';
 import { useTranslation } from "react-i18next";
 import {AppStateType} from "../../../redux/redux-store";
 
-type mapStateToPropsType = {
+type MapStateToPropsType = {
     sort: string;
 }
 
-type mapDispatchToPropsType = {
-    clearFilter: () => void
+type MapDispatchToPropsType = {
+    clearFilters: () => void
     updateFilter: (text: string) => void
     updatePeriod: (url: string) => void
     updatePage: (count: number) => void
 }
 type OwnPropsType = {}
 
-type PropsType = mapStateToPropsType & mapDispatchToPropsType & OwnPropsType
+type PropsType = MapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
 type onFunctionType = () => void
 
-const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePeriod, updatePage}) => {
+const PanelButtons: FC<PropsType> = ({sort, clearFilters, updateFilter, updatePeriod, updatePage}) => {
     const { t } = useTranslation();
     const [menuStatus, setMenuStatus] = useState<string>('');
 
@@ -39,14 +39,13 @@ const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePer
     };
 
     const onClearFilter: onFunctionType = () => {
-        clearFilter();
+        clearFilters();
         createRequest();
     }
 
     const buttonNames: string[] = [
         'INCOME TYPE',
         'INCOME',
-
         'ASSET',
         'MONTH',
         'WEEK',
@@ -108,27 +107,15 @@ const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePer
     );
 };
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         sort: state.operations.sort as string,
     };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        clearFilter: () => {
-            dispatch(clearFiltersActionCreator());
-        },
-        updateFilter: (text: string) => {
-            dispatch(updateFilterActionCreator(text));
-        },
-        updatePeriod: (url: string) => {
-            dispatch(updatePeriodActionCreator(url));
-        },
-        updatePage: (count: number) => {
-            dispatch(updatePageActionCreator(count));
-        }
-    };
-};
-
-export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(PanelButtons);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+    clearFilters,
+    updateFilter,
+    updatePeriod,
+    updatePage
+    })(PanelButtons);

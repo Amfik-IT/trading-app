@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import {ItemType} from "../../../types/types";
-import {clearFiltersActionCreator, InitialStateType} from "../../../redux/operations-reducer";
+import {clearFilters, InitialStateType} from "../../../redux/operations-reducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
 
@@ -351,12 +351,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     };
 };
 
-const mapDispatchToProps = (dispatch: any): mapDispatchToPropsType => {
-    return {
-        clearFilters: () => {
-            dispatch(clearFiltersActionCreator());
-        }
-    };
-};
-
-export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {clearFilters})(Dashboard);
