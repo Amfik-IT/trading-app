@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import React, {FC} from 'react';
 
 type PropsType = {
-    setSearch: () => void
+    setSearch: (e: any) => void
     search: string
 }
 

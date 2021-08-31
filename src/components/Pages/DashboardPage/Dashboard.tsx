@@ -1,18 +1,36 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {clearFiltersActionCreator} from '../../../redux/operations-reducer';
+import React, {FC} from 'react';
 import {NotificationManager} from 'react-notifications';
 import Chart from './Chart';
 import  './Dashboard.module.css'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useTranslation } from "react-i18next";
+import {ItemType} from "../../../types/types";
+import {clearFiltersActionCreator, InitialStateType} from "../../../redux/operations-reducer";
+import {AppStateType} from "../../../redux/redux-store";
+import {connect} from "react-redux";
 
+type mapStateToPropsType = {
+    operations: InitialStateType
+}
 
+type mapDispatchToPropsType = {
+    clearFilters: (count: number) => void
+}
+type OwnPropsType = {}
 
-const Dashboard = (props) => {
+type PropsType = mapStateToPropsType & mapDispatchToPropsType & OwnPropsType
+
+type DataType = {
+    labels: string[]
+    data: number[]
+}
+
+type ParsDataType = (data: ItemType[]) => DataType
+
+const Dashboard: FC<PropsType> = (props) => {
     const { t } = useTranslation();
-    const [data, setData] = useState({labels: [], data: []})
+    const [data, setData] = useState<DataType>({labels: [], data: []})
 
     useEffect(() => {
         fetch(`https://invest-dimasik.herokuapp.com/api/trades?limit=all`)
@@ -25,10 +43,10 @@ const Dashboard = (props) => {
     })
     },[])
 
-    function parsData(data) {
-        let newData = {labels: [], data: []};
-        let month = null;
-        let count = null;
+    const parsData: ParsDataType = (data) => {
+        let newData: DataType = {labels: [], data: []};
+        let month: number = 0;
+        let count: number = 0;
         for (let i = 0; i < data.length; i++) {
             let date = new Date(data[i].time)
             if (i === 0) {
@@ -38,7 +56,7 @@ const Dashboard = (props) => {
                 if (date.getMonth() === month) {
                     count += data[i].income;
                 } else {
-                    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    let months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                     newData.labels.push(months[month]);
                     newData.data.push(Math.ceil(count));
                     month = date.getMonth();
@@ -243,9 +261,6 @@ const Dashboard = (props) => {
                                                         <div
                                                             className='progress-bar bg-gradient-danger'
                                                             role='progressbar'
-                                                            aria-valuenow='60'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
                                                         ></div>
                                                     </div>
                                                 </div>
@@ -263,9 +278,6 @@ const Dashboard = (props) => {
                                                         <div
                                                             className='progress-bar bg-gradient-success'
                                                             role='progressbar'
-                                                            aria-valuenow='70'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
                                                         ></div>
                                                     </div>
                                                 </div>
@@ -283,9 +295,6 @@ const Dashboard = (props) => {
                                                         <div
                                                             className='progress-bar bg-gradient-primary'
                                                             role='progressbar'
-                                                            aria-valuenow='80'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
                                                         ></div>
                                                     </div>
                                                 </div>
@@ -303,9 +312,6 @@ const Dashboard = (props) => {
                                                         <div
                                                             className='progress-bar bg-gradient-info'
                                                             role='progressbar'
-                                                            aria-valuenow='75'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
                                                         ></div>
                                                     </div>
                                                 </div>
@@ -323,9 +329,6 @@ const Dashboard = (props) => {
                                                         <div
                                                             className='progress-bar bg-gradient-warning'
                                                             role='progressbar'
-                                                            aria-valuenow='30'
-                                                            aria-valuemin='0'
-                                                            aria-valuemax='100'
                                                         ></div>
                                                     </div>
                                                 </div>
@@ -342,18 +345,18 @@ const Dashboard = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         operations: state.operations,
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any): mapDispatchToPropsType => {
     return {
-        clearFilters: (count) => {
-            dispatch(clearFiltersActionCreator(count));
+        clearFilters: () => {
+            dispatch(clearFiltersActionCreator());
         }
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(Dashboard);

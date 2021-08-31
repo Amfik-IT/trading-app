@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 
 type PropsType = {
-    onClick: () => void
+    onClick: (e: any) => void
     active: string
     count: number
 }

@@ -4,17 +4,29 @@ import FiltersButton from '../FiltersButton/FiltersButton';
 import s from './FiltersButtons.module.css';
 import { connect } from 'react-redux';
 import createRequest from '../../../api/api';
-import {clearFiltersActionCreator, updateFilterActionCreator, updatePeriodActionCreator, updatePageActionCreator} from '../../../redux/operations-reducer';
+import {
+    clearFiltersActionCreator,
+    updateFilterActionCreator,
+    updatePeriodActionCreator,
+    updatePageActionCreator,
+} from '../../../redux/operations-reducer';
 import Button from '../Button/Button';
 import { useTranslation } from "react-i18next";
+import {AppStateType} from "../../../redux/redux-store";
 
-type PropsType = {
+type mapStateToPropsType = {
     sort: string;
+}
+
+type mapDispatchToPropsType = {
     clearFilter: () => void
     updateFilter: (text: string) => void
     updatePeriod: (url: string) => void
     updatePage: (count: number) => void
 }
+type OwnPropsType = {}
+
+type PropsType = mapStateToPropsType & mapDispatchToPropsType & OwnPropsType
 
 type onFunctionType = () => void
 
@@ -34,6 +46,7 @@ const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePer
     const buttonNames: string[] = [
         'INCOME TYPE',
         'INCOME',
+
         'ASSET',
         'MONTH',
         'WEEK',
@@ -78,7 +91,7 @@ const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePer
         }
     }
 
-    const buttons = buttonNames.map((item: string, idex: number) => (
+    const buttons: React.ReactElement[] = buttonNames.map((item: string, idex: number) => (
         <FiltersButton key={idex} id={item} name={t(item)} onFilter={onFilter}/>
     ));
 
@@ -95,9 +108,9 @@ const PanelButtons: FC<PropsType> = ({sort, clearFilter, updateFilter, updatePer
     );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        sort: state.operations.sort,
+        sort: state.operations.sort as string,
     };
 };
 
@@ -118,4 +131,4 @@ const mapDispatchToProps = (dispatch: any) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PanelButtons);
+export default connect<mapStateToPropsType, mapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, mapDispatchToProps)(PanelButtons);

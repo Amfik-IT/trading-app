@@ -22,11 +22,11 @@ const CLEAR_FILTERS: string = 'CLEAR_FILTERS';
 
 
 const initialState = {
-  items: null as ItemType[] | null,
-  isLoading: null as string | null,
+  items: [] as ItemType[],
+  isLoading: "" as string,
   errors: {}, // ! надо дать тип 
   search: "" as string,
-  fullCount: null as number | null,
+  fullCount: 0 as number,
   sort: "" as string,
   page: 1 as number,
   pageSize: 10 as number,
