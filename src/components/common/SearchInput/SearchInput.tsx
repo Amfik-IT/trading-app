@@ -1,6 +1,12 @@
 import { useTranslation } from "react-i18next";
+import React, {FC} from 'react';
 
-const SearchInput = (props) => {
+type PropsType = {
+    setSearch: (e: any) => void
+    search: string
+}
+
+const SearchInput: FC<PropsType> = ({setSearch, search}) => {
     const { t } = useTranslation();
     return (
         <form
@@ -18,8 +24,8 @@ const SearchInput = (props) => {
                         className='form-control'
                         placeholder={t("Search")}
                         type='text'
-                        value={props.search}
-                        onChange={props.setSearch}
+                        value={search}
+                        onChange={setSearch}
                     />
                 </div>
             </div>

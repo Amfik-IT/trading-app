@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import TablesContainer from './components/Pages/TablesPage/TablesContainer';
@@ -11,23 +11,30 @@ import { useState } from 'react';
 import createRequest from './api/api';
 import {NotificationContainer} from 'react-notifications';
 
-function App(props) {
-  const [pageInfo, setPageInfo] = useState({
+type PageInfoType = {
+  title: string
+  path: string
+  active: string
+}
+type onFunctionType = () => void
+
+const App: FC = () => {
+  const [pageInfo, setPageInfo] = useState<PageInfoType>({
     title: 'Dashboard',
     path: '',
-    active: 'Dashboard',
+    active: 'dashboard',
   });
 
-  const [menuStatus, setMenuStatus] = useState(false);
+  const [menuStatus, setMenuStatus] = useState<boolean>(false);
 
-  const menuToggler = () => {
+  const menuToggler: onFunctionType = () => {
     setMenuStatus( !menuStatus );
   }
   
   useEffect(() => {
     createRequest();
   },[])
-
+  
   return (
     <BrowserRouter>
       <div className={`${menuStatus ? "nav-open" : ""} g-sidenav-show g-sidenav-hidden`}>

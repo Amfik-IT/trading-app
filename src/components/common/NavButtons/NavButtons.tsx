@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Burger from '../Burger/Burger';
 
-const NavButtons = (props) => {
+type PropsType = {
+    menuToggler: () => void
+}
+
+const NavButtons: FC<PropsType> = ({menuToggler}) => {
     return (
         <ul className='navbar-nav align-items-center  ml-md-auto '>
             <li className='nav-item d-xl-none'>
-                <Burger menuToggler={props.menuToggler}/>
+                <Burger menuToggler={menuToggler}/>
             </li>
             <li className='nav-item dropdown'>
                 <a

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import logo from '../../assets/img/brand/blue.png';
 import NavItem from '../common/NavItem/NavItem';
 import { useTranslation } from "react-i18next";
 
-const Navbar = (props) => {
+type PropsType = {
+    setInfo: (pageInfo: {title: string, path: string, active: string}) => void
+    active: string
+}
+
+const Navbar: FC<PropsType> = ({setInfo, active}) => {
     const { t } = useTranslation();
     return (
         <nav className="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
@@ -16,13 +21,13 @@ const Navbar = (props) => {
                 <div className="navbar-inner">
                     <div className="collapse navbar-collapse" id="sidenav-collapse-main">
                         <ul className="navbar-nav">
-                            <NavItem setInfo={props.setInfo} 
-                            active={props.active === "Dashboard" ? true : false} 
+                            <NavItem setInfo={setInfo} 
+                            active={active === "Dashboard" ? true : false} 
                             icon="ni-tv-2" 
                             path="/dashboard" 
                             text={t("Dashboard")}/>
-                            <NavItem setInfo={props.setInfo} 
-                            active={props.active === "Tables" ? true : false} 
+                            <NavItem setInfo={setInfo} 
+                            active={active === "Tables" ? true : false} 
                             icon="ni-bullet-list-67" 
                             path="/tables" 
                             text={t("Tables")}/>

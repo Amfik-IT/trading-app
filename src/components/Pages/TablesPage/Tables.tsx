@@ -1,17 +1,26 @@
-import React from 'react';
+import React, {FC} from 'react';
 import LoaderOrError from '../../common/LoaderOrError/LoaderOrError';
 import loader from '../../../assets/img/loaderOrError/loader.gif';
 import error from '../../../assets/img/loaderOrError/error.jpg';
 import { useTranslation } from "react-i18next";
 
-const Tables = (props) => {
-    const { t } = useTranslation();
-    let inTbody;
+type PropsType = {
+    tableItems: React.ReactElement[] | null
+    isLoading: string
+    buttons: React.ReactElement[]
+    page: number
+    previousPage: () => void
+    nextPage: () => void
+}
 
-    if (props.isLoading === 'loading') {
+const Tables: FC<PropsType> = ({tableItems, buttons, isLoading,page , nextPage, previousPage }) => {
+    const { t } = useTranslation();
+    let inTbody: React.ReactElement[] | React.ReactElement | null;
+
+    if (isLoading === 'loading') {
         inTbody = <LoaderOrError loader={loader} />;
-    } else if (props.isLoading === 'completed') {
-        inTbody = props.operations;
+    } else if (isLoading === 'completed') {
+        inTbody = tableItems;
     } else {
         inTbody = <LoaderOrError loader={error} />;
     }
@@ -72,7 +81,9 @@ const Tables = (props) => {
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody className='list'>{inTbody}</tbody>
+                                <tbody className='list'>
+                                {inTbody}
+                                </tbody>
                             </table>
                         </div>
                         <div className='card-footer py-4'>
@@ -80,13 +91,12 @@ const Tables = (props) => {
                                 <ul className='pagination justify-content-end mb-0'>
                                     <li
                                         className={`page-item ${
-                                            props.page === 1 ? 'disabled' : ''
+                                            page === 1 ? 'disabled' : ''
                                         }`}
                                     >
                                         <button
-                                            onClick={props.previousPage}
+                                            onClick={previousPage}
                                             className='page-link'
-                                            href='/'
                                         >
                                             <i className='fas fa-angle-left'></i>
                                             <span className='sr-only'>
@@ -94,12 +104,11 @@ const Tables = (props) => {
                                             </span>
                                         </button>
                                     </li>
-                                    {props.buttons}
+                                    {buttons}
                                     <li className='page-item'>
                                         <button
-                                            onClick={props.nextPage}
+                                            onClick={nextPage}
                                             className='page-link'
-                                            href='/'
                                         >
                                             <i className='fas fa-angle-right'></i>
                                             <span className='sr-only'>
