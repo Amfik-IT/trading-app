@@ -1,6 +1,7 @@
 import store, {AppStateType} from '../redux/redux-store';
 import {loading, updateOperation, error} from "../redux/operations-reducer";
 import {NotificationManager} from 'react-notifications';
+import axios from 'axios';
 
 type CreateRequestType = () => void
 
@@ -12,9 +13,8 @@ const createRequest: CreateRequestType = () => {
     const period: string = state.operations.period;
     
     store.dispatch(loading());
-    fetch(`https://invest-dimasik.herokuapp.com/api/trades?${!period ? "" : period}&limit=${limit}&skip=${skip}&symbol=${symbol}`)
-    .then(response => response.json())
-    .then(items => store.dispatch(updateOperation(items)))
+    axios.get(`https://invest-dimasik.herokuapp.com/api/trades?${!period ? "" : period}&limit=${limit}&skip=${skip}&symbol=${symbol}`)
+    .then(response =>  {store.dispatch(updateOperation(response.data))})
     .catch(errors => {
         store.dispatch(error(errors));
         NotificationManager.error(errors.message, errors.name, 5000, () => {

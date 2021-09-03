@@ -9,6 +9,7 @@ import {ItemType} from "../../../types/types";
 import {clearFilters, InitialStateType} from "../../../redux/operations-reducer";
 import {AppStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
+import axios from 'axios';
 
 type mapStateToPropsType = {
     operations: InitialStateType
@@ -33,9 +34,8 @@ const Dashboard: FC<PropsType> = (props) => {
     const [data, setData] = useState<DataType>({labels: [], data: []})
 
     useEffect(() => {
-        fetch(`https://invest-dimasik.herokuapp.com/api/trades?limit=all`)
-        .then(response => response.json())
-        .then(items => setData(parsData(items.data)))
+        axios.get(`https://invest-dimasik.herokuapp.com/api/trades?limit=all`)
+        .then(response => setData(parsData(response.data.data)))
         .catch(errors => {
             NotificationManager.error(errors.message, errors.name, 5000, () => {
                 alert(errors.stack);

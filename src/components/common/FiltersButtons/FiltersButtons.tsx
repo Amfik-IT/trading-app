@@ -53,7 +53,7 @@ const PanelButtons: FC<PropsType> = ({sort, clearFilters, updateFilter, updatePe
     ];
 
     const onFilter = (e: any) => {
-        const date: any = new Date();
+        const date: Date = new Date();
         const now: string = date.toLocaleDateString().split('.').reverse().join('-');
         const month: string = String(date.getMonth() + 1).length === 1 ? "0" + (date.getMonth() + 1) : String(date.getMonth() + 1);
         const weekDay: number = date.getDay();
